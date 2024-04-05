@@ -1,12 +1,29 @@
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
 import { CatalogButton, HeaderButtons, Search } from './components';
+import { Link } from 'react-router-dom';
 
 const HeaderContainer = ({ className }) => {
+	const dispatch = useDispatch();
+	const userName = useSelector(({ user }) => user.login);
+	const logOut = () => {
+		localStorage.removeItem('user');
+		dispatch({ type: 'LOG_OUT' });
+	};
+
 	return (
 		<div className={className}>
 			<div className="header-top-bar">
-				<div></div>
-				<div>Войти</div>
+				<div>
+					<Link to="/">Logo</Link>
+				</div>
+				<div>
+					{userName ? (
+						<div onClick={logOut}>{userName}</div>
+					) : (
+						<Link to="/login">Войти</Link>
+					)}
+				</div>
 			</div>
 			<div className="header-bottom-bar">
 				<CatalogButton />

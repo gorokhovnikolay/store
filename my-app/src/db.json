@@ -13,85 +13,106 @@
       "password": "qwerty123",
       "role_id": 1,
       "registred_at": "2044-12-20 19:12"
+    },
+    {
+      "login": "ivan",
+      "password": "qwe123",
+      "role_id": 2,
+      "registred_at": "2024-04-05T12:39:38.850Z",
+      "id": "pb1gGYn"
+    },
+    {
+      "login": "petr",
+      "password": "qwe123",
+      "role_id": 2,
+      "registred_at": "2024-04-05T12:40:50.832Z",
+      "id": "rOMRkNa"
+    },
+    {
+      "login": "vasilisa",
+      "password": "qwe123",
+      "role_id": 2,
+      "registred_at": "2024-04-05T14:02:34.839Z",
+      "id": "vfXKRYh"
     }
   ],
-  "category" : [
-	{
-		"id": "001",
-		"name": "Бытовая техника",
-		"description": "Разнообразный и богатый опыт повышение уровня гражданского сознания представляет собой интересный эксперимент проверки дальнейших направлений развития проекта? Разнообразный и богатый опыт постоянный количественный рост и сфера нашей активности обеспечивает актуальность...",
-		"imageUrl":"https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg"
-	},
-	{
-		"id": "002",
-		"name": "Компьютеры",
-		"description": "С другой стороны повышение уровня гражданского сознания требует от нас анализа соответствующих условий активизации. Равным образом реализация намеченного плана развития в значительной степени обуславливает создание дальнейших направлений развития проекта. Соображения...",
-		"imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg"
-	}
+  "category": [
+    {
+      "id": "001",
+      "name": "Бытовая техника",
+      "description": "Разнообразный и богатый опыт повышение уровня гражданского сознания представляет собой интересный эксперимент проверки дальнейших направлений развития проекта? Разнообразный и богатый опыт постоянный количественный рост и сфера нашей активности обеспечивает актуальность...",
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg"
+    },
+    {
+      "id": "002",
+      "name": "Компьютеры",
+      "description": "С другой стороны повышение уровня гражданского сознания требует от нас анализа соответствующих условий активизации. Равным образом реализация намеченного плана развития в значительной степени обуславливает создание дальнейших направлений развития проекта. Соображения...",
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg"
+    }
   ],
   "products": [
-	{
-		"id": "001",
-		"title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-		"description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-		"price": "16898",
-		"isFavorite": false,
-		"imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg",
-		"atributesId":[]
-	},
-	{
-		"id": "002",
-		"title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-		"description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-		"price": "16898",
-		"isFavorite": false,
-		"imageUrl": "https://ir.ozone.ru/s3/multimedia-i/wc1000/6380310678.jpg",
-		"atributesId":[]
-	},
-	{
-		"id": "003",
-		"title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-		"description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-		"price": "16898",
-		"isFavorite": false,
-		"imageUrl": "https://ir.ozone.ru/s3/multimedia-a/wc1000/6116682166.jpg",
-		"atributesId":[]
-	},
-	{
-		"id": "004",
-		"title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-		"description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-		"price": "16898",
-		"isFavorite": false,
-		"imageUrl": "https://ir.ozone.ru/s3/multimedia-k/wc1000/6116682176.jpg",
-		"atributesId":[]
-	},
-	{
-		"id": "005",
-		"title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-		"description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-		"price": "16898",
-		"isFavorite": false,
-		"imageUrl": "https://ir.ozone.ru/s3/multimedia-1/wc1000/6116682157.jpg",
-		"atributesId":[]
-	}
+    {
+      "id": "001",
+      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
+      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
+      "price": "16898",
+      "isFavorite": false,
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg",
+      "atributesId": []
+    },
+    {
+      "id": "002",
+      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
+      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
+      "price": "16898",
+      "isFavorite": false,
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-i/wc1000/6380310678.jpg",
+      "atributesId": []
+    },
+    {
+      "id": "003",
+      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
+      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
+      "price": "16898",
+      "isFavorite": false,
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-a/wc1000/6116682166.jpg",
+      "atributesId": []
+    },
+    {
+      "id": "004",
+      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
+      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
+      "price": "16898",
+      "isFavorite": false,
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-k/wc1000/6116682176.jpg",
+      "atributesId": []
+    },
+    {
+      "id": "005",
+      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
+      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
+      "price": "16898",
+      "isFavorite": false,
+      "imageUrl": "https://ir.ozone.ru/s3/multimedia-1/wc1000/6116682157.jpg",
+      "atributesId": []
+    }
   ],
   "atributes": [
-	{
-		"id":"001",
-		"name":"Тип",
-		"value":"Монитор"
-	},
-	{
-		"id":"002",
-		"name":"Диагональ экрана, дюймы",
-		"value":"23.8"
-	},
-	{
-		"id":"003",
-		"name":"Разрешение",
-		"value":"1920×1080 Full HD"
-	}
+    {
+      "id": "001",
+      "name": "Тип",
+      "value": "Монитор"
+    },
+    {
+      "id": "002",
+      "name": "Диагональ экрана, дюймы",
+      "value": "23.8"
+    },
+    {
+      "id": "003",
+      "name": "Разрешение",
+      "value": "1920×1080 Full HD"
+    }
   ],
   "comments": [
     {

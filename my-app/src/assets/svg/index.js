@@ -6,3 +6,4 @@ export * from './search';
 export * from './user';
 export * from './settings';
 export * from './right-arrow';
+export * from './close';

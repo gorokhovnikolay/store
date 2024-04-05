@@ -6,7 +6,7 @@ import { Button } from '../../../button/button';
 const SearchContainer = ({ className }) => {
 	return (
 		<div className={className}>
-			<Input>
+			<Input placeholder="Поиск по наименованию..." id="search">
 				<Button width="50px" padding="0px">
 					<SearchIcon size="36px" color="white" />
 				</Button>
@@ -17,8 +17,5 @@ const SearchContainer = ({ className }) => {
 
 export const Search = styled(SearchContainer)`
 	width: 100%;
-	height: 50px;
-	border: 2px solid #62bceb;
-	border-radius: 25px;
 	margin: 0 10px;
 `;

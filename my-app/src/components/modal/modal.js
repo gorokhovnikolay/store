@@ -18,10 +18,10 @@ export const Modal = styled(ModalContainer)`
 	& .modal-container {
 		position: absolute;
 		background: white;
-		width: 300px;
-		top: 150px;
-		left: calc((100% - 1200px) / 2);
-		min-height: 50vh;
+		width: ${({ width = '300px' }) => width};
+		top: ${({ top = '150px' }) => top};
+		left: ${({ left = 'calc((100% - 1200px) / 2)' }) => left};
+		height: ${({ height = '50vh' }) => height};
 		border-radius: 25px;
 		padding: 25px;
 		box-shadow: 0px 0px 17px 0px #000000d1;

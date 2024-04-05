@@ -1,7 +1,9 @@
+import { useDispatch } from 'react-redux';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Header, Footer } from './components';
-import { CategoryPage } from './pages';
+import { CategoryPage, Login, Register } from './pages';
+import { useLayoutEffect } from 'react';
 
 const Content = styled.div`
 	text-align: center;
@@ -19,13 +21,22 @@ const App = styled.div`
 `;
 
 export const Store = () => {
+	const dispatch = useDispatch();
+
+	useLayoutEffect(() => {
+		const user = JSON.parse(localStorage.getItem('user'));
+		if (user) {
+			dispatch({ type: 'LOGIN_USER', payload: user });
+		}
+	}, [dispatch]);
+
 	return (
 		<App>
 			<Header />
 			<Content>
 				<Routes>
-					<Route path="/login" element={<div>login</div>} />
-					<Route path="/register" element={<div>register</div>} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
 					<Route path="/" element={<div>Main</div>} />
 					<Route path="/personal" element={<div>personal</div>} />
 					<Route path="/category" element={<CategoryPage />} />

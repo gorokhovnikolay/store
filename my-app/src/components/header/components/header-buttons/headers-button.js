@@ -2,8 +2,14 @@ import styled from 'styled-components';
 import { Button } from '../../../button/button';
 import { CartIcon, UserIcon, HeartIcon, SettingsIcon } from '../../../../assets/svg';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ROLE_ID } from '../../../../constants/role';
 
 const HeaderButtonsContainer = ({ className }) => {
+	const roleId = useSelector(({ user }) => user.role);
+
+	const isDenied = Number(roleId) === ROLE_ID.ADMIN;
+
 	return (
 		<div className={className}>
 			<Link to="/cart">
@@ -19,11 +25,13 @@ const HeaderButtonsContainer = ({ className }) => {
 					<UserIcon size="36px" color="white" />
 				</Button>
 			</Link>
-			<Link to="/admin">
-				<Button width="50px" padding="0px">
-					<SettingsIcon size="36px" color="white" />
-				</Button>
-			</Link>
+			{isDenied && (
+				<Link to="/admin">
+					<Button width="50px" padding="0px">
+						<SettingsIcon size="36px" color="white" />
+					</Button>
+				</Link>
+			)}
 		</div>
 	);
 };

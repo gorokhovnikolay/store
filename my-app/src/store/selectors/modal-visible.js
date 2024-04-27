@@ -1,1 +1,1 @@
-export const modalVisible = ({ modal }) => modal.modalVisible;
+export const modalContainerVisible = ({ modalCatalog }) => modalCatalog.modalVisible;

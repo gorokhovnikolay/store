@@ -15,8 +15,8 @@ export const Button = styled(ButtonContainer)`
 	justify-content: center;
 	font-size: 16px;
 	font-weight: 600;
-	background: #62bceb;
-	color: white;
+	background: ${({ background = '#62bceb' }) => background};
+	color: ${({ color = 'white' }) => color};
 	border: 1px solid #62bceb;
 	padding: ${({ padding = '5px 15px' }) => padding};
 	cursor: pointer;

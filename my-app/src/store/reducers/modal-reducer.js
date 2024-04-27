@@ -1,13 +1,19 @@
 const initialState = {
-	modalVisible: false,
-	data: [],
+	modal: false,
+	confirm: () => {},
+	cancel: () => {},
 };
 
 export const modalReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
-		case 'MODAL_VISIBLE':
-			return { ...state, modalVisible: !state.modalVisible };
-		case 'MODAL_CLOSE':
+		case 'VISIBLE_MODAL':
+			return {
+				...state,
+				modal: payload.modal,
+				confirm: payload.confirm,
+				cancel: payload.cancel,
+			};
+		case 'CLOSE_MODAL':
 			return initialState;
 		default:
 			return state;

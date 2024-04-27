@@ -1,2 +1,4 @@
 export * from './userReducer';
+export * from './modal-catalog-reducer';
 export * from './modal-reducer';
+export * from './searchPhraseReducer';

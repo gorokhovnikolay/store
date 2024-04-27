@@ -1,8 +1,7 @@
-export const fetchRegister = async ({ login, password }) => {
+export const fetchRegister = async ({ login, password, roleId = 2, email }) => {
 	const candidate = await fetch(`http://localhost:3003/users?login=${login}`).then(
 		(data) => data.json(),
 	);
-
 	if (candidate.length > 0) {
 		return {
 			error: 'Такой пользаватель уже существует',
@@ -16,8 +15,9 @@ export const fetchRegister = async ({ login, password }) => {
 		body: JSON.stringify({
 			login,
 			password,
-			role_id: 2,
+			role_id: roleId,
 			registred_at: new Date().toISOString(),
+			email,
 		}),
 	}).then((data) => data.json());
 

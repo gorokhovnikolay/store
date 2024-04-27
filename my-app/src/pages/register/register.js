@@ -5,9 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
 import { Button, Input } from '../../components';
 import { Link } from 'react-router-dom';
-import { fetchRegister } from '../../api/fetch-register';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { request } from '../../utils';
 
 const regShemaYup = yup.object().shape({
 	login: yup
@@ -16,6 +16,8 @@ const regShemaYup = yup.object().shape({
 		.matches(/^\w+$/, 'Логин должен содержать только буквы и цыфры')
 		.min(3, 'Логин должен быть не более 3 символов')
 		.max(20, 'Логин не должен быть более 20 символов'),
+	email: yup.string().email().required('Не ввели email'),
+	phone: yup.string().required('Не ввели телефон'),
 	password: yup
 		.string()
 		.required('Введите Пароль')
@@ -42,27 +44,33 @@ const RegisterContainer = ({ className }) => {
 			login: '',
 			password: '',
 			confirmPassword: '',
+			email: '',
+			phone: '',
 		},
 		resolver: yupResolver(regShemaYup),
 	});
 
-	const onSubmit = ({ login, password }) => {
+	const onSubmit = ({ login, password, email, phone }) => {
 		setIsLoading(true);
-		fetchRegister({ login, password }).then(({ error, res }) => {
-			if (error) {
-				setServerError(error);
-				return;
-			}
-			setServerError('');
-			dispatch({ type: 'LOGIN_USER', payload: res });
-			navigate('/');
-			setIsLoading(false);
-		});
+		request('/register', 'POST', { login, password, email, phone }).then(
+			({ error, user }) => {
+				if (error) {
+					setIsLoading(false);
+					setServerError(error);
+					return;
+				}
+				setServerError('');
+				dispatch({ type: 'LOGIN_USER', payload: user });
+				navigate('/');
+				setIsLoading(false);
+			},
+		);
 		reset();
 	};
-
-	const formError = errors?.login?.message || errors?.password?.message;
-	const error = serverError || formError;
+	const passError = errors?.password?.message || errors?.confirmPassword?.message;
+	const formError = errors?.login?.message || passError;
+	const emailerror = formError || errors?.email?.message;
+	const error = serverError || emailerror;
 
 	return isLoading ? (
 		<progress value={null} />
@@ -77,6 +85,22 @@ const RegisterContainer = ({ className }) => {
 						id="login"
 						type="text"
 						{...register('login')}
+					/>
+				</div>
+				<div className="email">
+					<Input
+						placeholder="Введите ваш email"
+						id="email"
+						type="text"
+						{...register('email')}
+					/>
+				</div>
+				<div className="phone">
+					<Input
+						placeholder="Введите ваш телефон"
+						id="phone"
+						type="text"
+						{...register('phone')}
 					/>
 				</div>
 				<div className="password">

@@ -8,6 +8,7 @@ import { Button, Input } from '../../components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { fetchLogin } from '../../api/fetch-login';
+import { request } from '../../utils';
 
 const loginShemaYup = yup.object().shape({
 	login: yup
@@ -26,6 +27,7 @@ const loginShemaYup = yup.object().shape({
 
 const LoginContainer = ({ className }) => {
 	const [serverErorr, setServerError] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const {
@@ -44,19 +46,26 @@ const LoginContainer = ({ className }) => {
 
 	const onSubmit = ({ login, password }) => {
 		reset();
-		fetchLogin({ login, password }).then(({ error, res }) => {
+		request('/login', 'POST', { login, password }).then(({ error, user }) => {
 			if (error) {
 				setServerError(error);
+				setIsLoading(false);
 				return;
 			}
+			localStorage.setItem('user', JSON.stringify(user));
 			setServerError('');
-			dispatch({ type: 'LOGIN_USER', payload: res });
+			setIsLoading(false);
+			dispatch({ type: 'LOGIN_USER', payload: user });
 			navigate('/');
 		});
 	};
 
 	const formError = errors?.login?.message || errors?.password?.message;
 	const error = serverErorr || formError;
+
+	if (isLoading) {
+		return <progress value={null} />;
+	}
 
 	return (
 		<div className={className}>

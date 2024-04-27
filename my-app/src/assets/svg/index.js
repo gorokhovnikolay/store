@@ -7,3 +7,5 @@ export * from './user';
 export * from './settings';
 export * from './right-arrow';
 export * from './close';
+export * from './edit';
+export * from './remove';

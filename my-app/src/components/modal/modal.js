@@ -1,10 +1,26 @@
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { Button } from '../button/button';
 
-const ModalContainer = ({ children, className }) => {
+const ModalContainer = ({ className }) => {
+	const { modal, confirm, cancel } = useSelector(({ modal }) => modal);
+	const message = 'Удалить пользавателя?';
 	return (
-		<div className={className}>
-			<div className="modal-container">{children}</div>
-		</div>
+		modal && (
+			<div className={className}>
+				<div className="modal-container">
+					<p className="modal-message">{message}</p>
+					<div className="modal-btn">
+						<Button width="auto" onClick={confirm}>
+							Да
+						</Button>
+						<Button width="auto" onClick={cancel}>
+							Нет
+						</Button>
+					</div>
+				</div>
+			</div>
+		)
 	);
 };
 
@@ -18,22 +34,21 @@ export const Modal = styled(ModalContainer)`
 	& .modal-container {
 		position: absolute;
 		background: white;
-		width: ${({ width = '300px' }) => width};
-		top: ${({ top = '150px' }) => top};
-		left: ${({ left = 'calc((100% - 1200px) / 2)' }) => left};
-		height: ${({ height = '50vh' }) => height};
+		width: ${({ width = '350px' }) => width};
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		height: ${({ height = '200px' }) => height};
 		border-radius: 25px;
 		padding: 25px;
 		box-shadow: 0px 0px 17px 0px #000000d1;
-		animation: isModal 250ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
 	}
-
-	@-webkit-keyframes isModal {
-		from {
-			left: -300px;
-		}
-		to {
-			left: calc((100% - 1200px) / 2);
-		}
+	& .modal-btn {
+		display: flex;
+		justify-content: space-around;
+	}
+	& .modal-message {
+		text-align: center;
+		font-size: 20px;
 	}
 `;

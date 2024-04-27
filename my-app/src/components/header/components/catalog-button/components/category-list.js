@@ -1,29 +1,23 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getCategory } from '../../../../../api/get-category';
 import { Link } from 'react-router-dom';
 import { CategoryItem } from './category-item';
+import { useCategoryesList } from '../../../../../hooks/use-categoryes-list';
+import { AdminList } from '../../../../admin-list/admin-list';
 
 const CategoryListContainer = ({ className }) => {
-	const [categoryes, setCategoryes] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-
-	useEffect(() => {
-		setIsLoading(true);
-		getCategory().then((cat) => {
-			setIsLoading(false);
-			setCategoryes(cat);
-		});
-	}, []);
+	const { data, isLoading, errorServer } = useCategoryesList(getCategory);
 
 	return (
-		<div className={className}>
-			<Link to="/category">Все категории</Link>
-			{isLoading && <progress value={null} />}
-			{categoryes.map((cat) => {
-				return <CategoryItem key={cat.id} cat={cat} />;
-			})}
-		</div>
+		<AdminList isLoading={isLoading} errorServer={errorServer}>
+			<div className={className}>
+				<Link to="/category">Все категории</Link>
+				{isLoading && <progress value={null} />}
+				{data.map((cat) => {
+					return <CategoryItem key={cat.id} cat={cat} />;
+				})}
+			</div>
+		</AdminList>
 	);
 };
 

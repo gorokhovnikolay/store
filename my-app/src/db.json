@@ -3,98 +3,178 @@
     {
       "id": "001",
       "login": "nikolay",
-      "password": "qwerty123",
+      "password": "qwe123",
+      "email": "gorokhovnikolaya@gmail.com",
       "role_id": 0,
-      "registred_at": "2024-02-11"
+      "registred_at": "2024-02-11",
+      "phone": "89203106682"
     },
     {
       "id": "715e",
       "login": "nikolay2",
       "password": "qwerty123",
+      "email": "nikolay2@mail.com",
       "role_id": 1,
       "registred_at": "2044-12-20 19:12"
     },
     {
-      "login": "ivan",
-      "password": "qwe123",
-      "role_id": 2,
-      "registred_at": "2024-04-05T12:39:38.850Z",
-      "id": "pb1gGYn"
-    },
-    {
-      "login": "petr",
-      "password": "qwe123",
-      "role_id": 2,
-      "registred_at": "2024-04-05T12:40:50.832Z",
-      "id": "rOMRkNa"
-    },
-    {
       "login": "vasilisa",
       "password": "qwe123",
+      "email": "vasilisa@mail.com",
+      "role_id": "2",
+      "registred_at": "2024-04-11T10:28:22.413Z",
+      "id": "2AaBZtH",
+      "phone": "89206661108"
+    },
+    {
+      "login": "Ilyya",
+      "password": "qwe123",
       "role_id": 2,
-      "registred_at": "2024-04-05T14:02:34.839Z",
-      "id": "vfXKRYh"
+      "registred_at": "2024-04-12T04:53:29.792Z",
+      "email": "Ilya@mail.ru",
+      "id": "MBjohCn",
+      "phone": "89203106682"
     }
   ],
   "category": [
     {
-      "id": "001",
-      "name": "Бытовая техника",
-      "description": "Разнообразный и богатый опыт повышение уровня гражданского сознания представляет собой интересный эксперимент проверки дальнейших направлений развития проекта? Разнообразный и богатый опыт постоянный количественный рост и сфера нашей активности обеспечивает актуальность...",
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg"
+      "name": "Мужские",
+      "description": "Подходят для мужчин",
+      "color": "#ff0000",
+      "id": "Y_81WXV"
     },
     {
-      "id": "002",
-      "name": "Компьютеры",
-      "description": "С другой стороны повышение уровня гражданского сознания требует от нас анализа соответствующих условий активизации. Равным образом реализация намеченного плана развития в значительной степени обуславливает создание дальнейших направлений развития проекта. Соображения...",
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg"
+      "name": "Женские",
+      "description": "Подходят для женщин",
+      "color": "#ff00c8",
+      "id": "BgC5YwU"
+    },
+    {
+      "name": "Высокие",
+      "description": "",
+      "color": "#ffd91a",
+      "id": "mkkPN5g"
+    },
+    {
+      "name": "Низкие",
+      "description": "",
+      "color": "#3d5dff",
+      "id": "q7WQEA6"
+    },
+    {
+      "name": "Для детей",
+      "description": "",
+      "color": "#36b408",
+      "id": "B38uks6"
     }
   ],
   "products": [
     {
-      "id": "001",
-      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-      "price": "16898",
-      "isFavorite": false,
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-r/wc1000/6875814195.jpg",
-      "atributesId": []
+      "name": "Кеды Converse",
+      "description": "Информация о технических характеристиках, комплекте поставки, стране изготовления, внешнем виде и цвете товара носит справочный характер и основывается на последних доступных к моменту публикации сведениях",
+      "price": 4131,
+      "cat": [
+        {
+          "id": "Y_81WXV",
+          "name": "Мужские",
+          "color": "black"
+        }
+      ],
+      "image": "https://ir.ozone.ru/s3/multimedia-1-h/wc1000/6959107961.jpg",
+      "id": 7
     },
     {
-      "id": "002",
-      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-      "price": "16898",
-      "isFavorite": false,
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-i/wc1000/6380310678.jpg",
-      "atributesId": []
+      "name": "Кеды Converse Chuck Taylor All Star",
+      "description": "Господа, постоянный количественный рост и сфера нашей активности в значительной степени обусловливает важность первоочередных требований.",
+      "price": 4004,
+      "cat": [
+        {
+          "id": "Y_81WXV",
+          "name": "Мужские",
+          "color": "black"
+        },
+        {
+          "id": "BgC5YwU",
+          "name": "Женские",
+          "color": "pink"
+        }
+      ],
+      "image": "https://ir.ozone.ru/s3/multimedia-1-y/wc1000/6937262998.jpg",
+      "id": 8
     },
     {
-      "id": "003",
-      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-      "price": "16898",
-      "isFavorite": false,
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-a/wc1000/6116682166.jpg",
-      "atributesId": []
+      "name": "Кеды Converse Chuck Taylor All Star '70",
+      "description": "К 70-м годам 20 века кроссовки Chuck Taylor All Star постепенно превратились в одни из культовых баскетбольных кроссовок. Сочетая в себе классические элементы с современными деталями комфорта, Chuck 70 имеет звездную нашивку на щиколотке, гладкую подошву для фирменного винтажного вида, верх из переработанного холста со свежей расцветкой и стельку OrthoLite для комфорта в течение всего дня.\nВысокий топ сочетается с верхом из холста rPET и изготовлен из переработанного полиэстера\nТрадиционные элементы дизайна, такие как звездообразные накладки на щиколотке и резиновая песочница на подошве\nКлассическая гладкая подошва для ретро-образа\nСтельки OrthoLite для комфорта",
+      "price": 5277,
+      "cat": [
+        {
+          "id": "Y_81WXV",
+          "name": "Мужские",
+          "color": "black"
+        },
+        {
+          "id": "BgC5YwU",
+          "name": "Женские",
+          "color": "pink"
+        },
+        {
+          "id": "mkkPN5g",
+          "name": "Высокие",
+          "color": "green"
+        }
+      ],
+      "image": "https://ir.ozone.ru/s3/multimedia-c/wc1000/6689844120.jpg",
+      "id": 9
     },
     {
-      "id": "004",
-      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-      "price": "16898",
-      "isFavorite": false,
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-k/wc1000/6116682176.jpg",
-      "atributesId": []
+      "name": "Кеды Converse Chuck Taylor All Star '70",
+      "description": "К 70-м годам 20 века кроссовки Chuck Taylor All Star постепенно превратились в одни из культовых баскетбольных кроссовок. Сочетая в себе классические элементы с современными деталями комфорта, Chuck 70 имеет звездную нашивку на щиколотке, гладкую подошву для фирменного винтажного вида, верх из переработанного холста со свежей расцветкой и стельку OrthoLite для комфорта в течение всего дня.",
+      "price": 5277,
+      "cat": [
+        {
+          "id": "Y_81WXV",
+          "name": "Мужские",
+          "color": "black"
+        },
+        {
+          "id": "q7WQEA6",
+          "name": "Низкие",
+          "color": "blue"
+        }
+      ],
+      "image": "https://ir.ozone.ru/s3/multimedia-9/wc1000/6689836989.jpg",
+      "id": 10
     },
     {
-      "id": "005",
-      "title": "ASUS 23.8 Монитор TUF GAMING VG249Q, черный",
-      "description": "Игровой монитор TUF Gaming VG249Q: 23,8-дюймовый экран формата Full HD (1920x1080), 144 Гц, IPS, Extreme Low Motion Blur, Adaptive-Sync, FreeSync, 1 мс (MPRT)",
-      "price": "16898",
-      "isFavorite": false,
-      "imageUrl": "https://ir.ozone.ru/s3/multimedia-1/wc1000/6116682157.jpg",
-      "atributesId": []
+      "name": "Кеды Converse Chuck Taylor All Star '70",
+      "description": "Каждый из нас понимает очевидную вещь: убеждённость некоторых оппонентов играет определяющее значение для первоочередных требований. Безусловно, синтетическое тестирование обеспечивает актуальность прогресса профессионального сообщества.",
+      "price": 4966,
+      "cat": [
+        {
+          "id": "B38uks6",
+          "name": "Для детей"
+        },
+        {
+          "id": "q7WQEA6",
+          "name": "Низкие"
+        }
+      ],
+      "image": "https://ir.ozone.ru/s3/multimedia-1-x/wc1000/6994015305.jpg",
+      "id": 11
+    },
+    {
+      "name": "Кеды Converse Chuck Taylor All Star '70",
+      "description": "Но современная методология разработки требует анализа первоочередных требований. Наше дело не так однозначно, как может показаться: синтетическое тестирование однозначно определяет каждого участника как способного принимать собственные решения касаемо прогресса профессионального сообщества.",
+      "price": 5100,
+      "cat": [
+        {
+          "id": "B38uks6",
+          "name": "Для детей",
+          "color": "#36b408"
+        }
+      ],
+      "image": "https://ir.ozone.ru/s3/multimedia-1-a/wc1000/6993997786.jpg",
+      "id": 12
     }
   ],
   "atributes": [
@@ -116,11 +196,10 @@
   ],
   "comments": [
     {
-      "id": "863e",
-      "autor_id": "nikolay",
-      "content": "В целом, конечно, разбавленное изрядной долей эмпатии, рациональное мышление создаёт необходимость включения в",
-      "publishing_comment_at": "2045-05-31 22:39",
-      "productsId": "4"
+      "id": 1,
+      "title": "1212312312",
+      "author": "userId",
+      "products": "productsId"
     }
   ],
   "roles": [

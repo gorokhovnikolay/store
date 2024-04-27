@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { CatalogButton, HeaderButtons, Search } from './components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { request } from '../../utils';
 
 const HeaderContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const userName = useSelector(({ user }) => user.login);
+	const navigate = useNavigate();
 	const logOut = () => {
-		localStorage.removeItem('user');
-		dispatch({ type: 'LOG_OUT' });
+		request('/logout', 'POST').then(({ error, user }) => {
+			localStorage.removeItem('user');
+			dispatch({ type: 'LOG_OUT' });
+			navigate('/');
+		});
 	};
 
 	return (

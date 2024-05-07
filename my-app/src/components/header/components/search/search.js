@@ -2,11 +2,30 @@ import styled from 'styled-components';
 import { Input } from '../../../input/input';
 import { SearchIcon } from '../../../../assets/svg/search';
 import { Button } from '../../../button/button';
+import { debounce } from '../../../../utils/debounce';
+import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 const SearchContainer = ({ className }) => {
+	const dispatch = useDispatch();
+
+	const setSearchPhrase = (phrase) => {
+		dispatch({ type: 'SEARCH_PHRASE', payload: phrase });
+	};
+
+	const debounceSearchPhrase = useRef(debounce(setSearchPhrase, 2000)).current;
+
+	const changeSearchPhrase = ({ target }) => {
+		debounceSearchPhrase(target.value);
+	};
+
 	return (
 		<div className={className}>
-			<Input>
+			<Input
+				placeholder="Поиск по наименованию..."
+				id="search"
+				onChange={changeSearchPhrase}
+			>
 				<Button width="50px" padding="0px">
 					<SearchIcon size="36px" color="white" />
 				</Button>
@@ -17,8 +36,5 @@ const SearchContainer = ({ className }) => {
 
 export const Search = styled(SearchContainer)`
 	width: 100%;
-	height: 50px;
-	border: 2px solid #62bceb;
-	border-radius: 25px;
 	margin: 0 10px;
 `;

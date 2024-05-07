@@ -15,13 +15,16 @@ export const Button = styled(ButtonContainer)`
 	justify-content: center;
 	font-size: 16px;
 	font-weight: 600;
-	background: #62bceb;
-	color: white;
+	background: ${({ background = '#62bceb' }) => background};
+	color: ${({ color = 'white' }) => color};
 	border: 1px solid #62bceb;
 	padding: ${({ padding = '5px 15px' }) => padding};
 	cursor: pointer;
 	height: ${({ height = '100%' }) => height};
 	width: ${({ width = '100%' }) => width};
+	position: ${({ position = 'relative' }) => position};
+	top: ${({ top = '0px' }) => top};
+	right: ${({ right = '0px' }) => right};
 	& img {
 		margin-right: 5px;
 	}

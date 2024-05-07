@@ -1,15 +1,38 @@
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { Header, Footer } from './components';
+import { Header, Footer, Modal } from './components';
+import {
+	Admin,
+	CategoryPage,
+	EditUser,
+	Login,
+	Register,
+	Main,
+	Product,
+	Cart,
+} from './pages';
+import {
+	AddUser,
+	CategoryAdd,
+	Categorys,
+	ProductAdd,
+	Products,
+	ProductEdit,
+	Orders,
+} from './pages/admin';
+import { useEffect, useLayoutEffect } from 'react';
+import { Users } from './pages/admin';
+import { request } from './utils';
 
 const Content = styled.div`
 	text-align: center;
-	padding: 10px 25px;
+	padding: 25px 25px;
+	height: 100%;
 `;
 const App = styled.div`
 	display: flex;
 	flex-direction: column;
-	height: auto;
 	min-height: 100%;
 	max-width: 1200px;
 	margin: 0 auto;
@@ -18,42 +41,52 @@ const App = styled.div`
 `;
 
 export const Store = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		request('/user').then(({ error, user }) => {
+			if (error) {
+				console.log(error);
+				return;
+			}
+			dispatch({ type: 'LOGIN_USER', payload: user });
+		});
+	}, [dispatch]);
+
 	return (
 		<App>
 			<Header />
 			<Content>
 				<Routes>
-					<Route path="/login" element={<div>login</div>} />
-					<Route path="/register" element={<div>register</div>} />
-					<Route path="/" element={<div>Main</div>} />
-					<Route path="/category" element={<div>category</div>} />
-					<Route
-						path="/category/:catId"
-						element={<div>/category/:catId</div>}
-					/>
-					<Route
-						path="/category/:catId/:productId"
-						element={<div>post id</div>}
-					/>
-					<Route path="/cart" element={<div>cart</div>} />
+					<Route path="/login" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+					<Route path="/" element={<Main />} />
+					<Route path="/personal" element={<div>personal</div>} />
+					<Route path="/category" element={<CategoryPage />} />
+					<Route path="/product/:productId" element={<Product />} />
+					<Route path="/category/:catId" element={<CategoryPage />} />
+					<Route path="/cart" element={<Cart />} />
 					<Route path="/acceptorder" element={<div>post id</div>} />
 					<Route path="/successorder" element={<div>post id</div>} />
-					<Route
-						path="/admin"
-						element={
-							<div>
-								admin <Outlet />
-							</div>
-						}
-					>
-						<Route path="main" element={<div>admin main</div>} />
-						<Route path="users" element={<div>admin users</div>} />
-						<Route path="orders" element={<div>admin orders</div>} />
+					<Route path="/admin" element={<Admin />}>
+						<Route index element={<Admin />} />
+						<Route path="users" element={<Users />} />
+						<Route path="users/edit/:id" element={<EditUser />} />
+						<Route path="users/add/:roleId" element={<AddUser />} />
+						<Route path="personal/edit/:id" element={<EditUser />} />
+						<Route path="orders" element={<Orders />} />
+						<Route path="categoryes" element={<Categorys />} />
+						<Route path="category/edit/:id" element={<CategoryAdd />} />
+						<Route path="category/add" element={<CategoryAdd />} />
+						<Route path="products" element={<Products />} />
+						<Route path="products/edit/:id" element={<ProductEdit />} />
+						<Route path="products/add" element={<ProductAdd />} />
 					</Route>
 					<Route path="*" element={<div>Ошибка</div>} />
 				</Routes>
 			</Content>
 			<Footer />
+			<Modal />
 		</App>
 	);
 };

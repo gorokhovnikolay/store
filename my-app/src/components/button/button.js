@@ -22,6 +22,9 @@ export const Button = styled(ButtonContainer)`
 	cursor: pointer;
 	height: ${({ height = '100%' }) => height};
 	width: ${({ width = '100%' }) => width};
+	position: ${({ position = 'relative' }) => position};
+	top: ${({ top = '0px' }) => top};
+	right: ${({ right = '0px' }) => right};
 	& img {
 		margin-right: 5px;
 	}

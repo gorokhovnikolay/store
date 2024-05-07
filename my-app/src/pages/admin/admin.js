@@ -1,7 +1,12 @@
+import { useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
 const AdminContainer = ({ className }) => {
+	const role = useSelector(({ user }) => user.role);
+	if (Number(role) !== 0) {
+		return <div> У вас нет прав доступа к данному разделу </div>;
+	}
 	return (
 		<div className={className}>
 			<div className="right-panel">

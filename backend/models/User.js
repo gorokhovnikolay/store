@@ -31,6 +31,12 @@ const UserShema = mongoose.Schema(
 			required: true,
 			default: ROLE.USER,
 		},
+		cart: [
+			{
+				type: mongoose.Types.ObjectId,
+				ref: "Products",
+			},
+		],
 	},
 	{ timestamps: true }
 );

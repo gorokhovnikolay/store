@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import { Button, Input } from '../../components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { fetchLogin } from '../../api/fetch-login';
 import { request } from '../../utils';
 
 const loginShemaYup = yup.object().shape({
@@ -52,7 +51,6 @@ const LoginContainer = ({ className }) => {
 				setIsLoading(false);
 				return;
 			}
-			localStorage.setItem('user', JSON.stringify(user));
 			setServerError('');
 			setIsLoading(false);
 			dispatch({ type: 'LOGIN_USER', payload: user });

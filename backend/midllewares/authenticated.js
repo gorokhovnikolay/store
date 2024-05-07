@@ -5,12 +5,12 @@ module.exports = async function (req, res, next) {
 	try {
 		const token = req.cookies.token;
 		const { id } = jwt.verify(token, process.env.JWT_SECRET);
-		const user = await User.findOne({ _id: id });
+		const user = await User.findOne({ _id: id }).populate("cart");
 		req.user = user;
 		next();
 	} catch (e) {
 		res.send({
-			error: "Что то пошло не так или у вас нет прав доступа к этому разделу",
+			error: "Что то пошло не так или вы не авторизованы на этом сайте",
 		});
 	}
 };

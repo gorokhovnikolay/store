@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AdminList } from '../../../components';
+import { ContainerBlock } from '../../../components';
 import { CategoryItem } from './components/categoty-item';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components';
@@ -30,7 +30,7 @@ const CategoryesContainer = ({ className }) => {
 	}, [refresh]);
 
 	return (
-		<AdminList errorServer={errorServer} isLoading={isLoading}>
+		<ContainerBlock errorServer={errorServer} isLoading={isLoading}>
 			<div className={className}>
 				<div className="category-header">
 					<h2>Категории: {data.length}</h2>
@@ -52,7 +52,7 @@ const CategoryesContainer = ({ className }) => {
 					);
 				})}
 			</div>
-		</AdminList>
+		</ContainerBlock>
 	);
 };
 

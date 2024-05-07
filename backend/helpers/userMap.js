@@ -9,5 +9,6 @@ module.exports = function (user) {
 		role: user.role,
 		id: user._id,
 		createdAt: formatData(user.createdAt),
+		cart: user.cart,
 	};
 };

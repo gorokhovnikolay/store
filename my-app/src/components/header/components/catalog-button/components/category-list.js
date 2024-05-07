@@ -1,23 +1,39 @@
 import styled from 'styled-components';
-import { getCategory } from '../../../../../api/get-category';
 import { Link } from 'react-router-dom';
 import { CategoryItem } from './category-item';
-import { useCategoryesList } from '../../../../../hooks/use-categoryes-list';
-import { AdminList } from '../../../../admin-list/admin-list';
+import { ContainerBlock } from '../../../../admin-list/admin-list';
+import { useEffect, useState } from 'react';
+import { request } from '../../../../../utils';
 
 const CategoryListContainer = ({ className }) => {
-	const { data, isLoading, errorServer } = useCategoryesList(getCategory);
+	const [errorServer, setErrorServer] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+	const [data, setData] = useState([]);
+
+	useEffect(() => {
+		setIsLoading(true);
+		request('/category')
+			.then(({ error, categoryes }) => {
+				if (error) {
+					setIsLoading(false);
+					setErrorServer(error);
+					return;
+				}
+				setData(categoryes);
+			})
+			.finally(() => setIsLoading(false));
+	}, []);
 
 	return (
-		<AdminList isLoading={isLoading} errorServer={errorServer}>
+		<ContainerBlock isLoading={isLoading} errorServer={errorServer}>
 			<div className={className}>
 				<Link to="/category">Все категории</Link>
 				{isLoading && <progress value={null} />}
 				{data.map((cat) => {
-					return <CategoryItem key={cat.id} cat={cat} />;
+					return <CategoryItem key={cat._id} cat={cat} />;
 				})}
 			</div>
-		</AdminList>
+		</ContainerBlock>
 	);
 };
 

@@ -14,7 +14,7 @@ const AdminListContainer = ({ className, errorServer, isLoading, children }) => 
 	);
 };
 
-export const AdminList = styled(AdminListContainer)`
+export const ContainerBlock = styled(AdminListContainer)`
 	display: flex;
 	align-items: center;
 	justify-content: center;

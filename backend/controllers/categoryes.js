@@ -1,9 +1,9 @@
 const Category = require("../models/Category");
 
-function getCategory() {
+function getCategoryes() {
 	return Category.find();
 }
 
 module.exports = {
-	getCategory,
+	getCategoryes,
 };

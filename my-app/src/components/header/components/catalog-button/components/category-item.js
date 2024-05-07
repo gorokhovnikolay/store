@@ -4,7 +4,7 @@ import { RightArrowIcon } from '../../../../../assets/svg';
 
 const CategoryItemContainer = ({ cat, className }) => {
 	return (
-		<Link to={`/category/${cat.id}`}>
+		<Link to={`/category/${cat._id}`}>
 			<div className={className}>
 				<div>{cat.name}</div>
 				<RightArrowIcon color="black" size="30px" />

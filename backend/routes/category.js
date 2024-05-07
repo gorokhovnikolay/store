@@ -1,5 +1,5 @@
 const express = require("express");
-
+const { getCategoryes } = require("../controllers/categoryes");
 const router = express.Router({ mergeParams: true });
 
 router.get("/", async (req, res) => {

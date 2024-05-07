@@ -58,15 +58,17 @@ const UserItemContainer = ({
 						<EditIcon size="20px" color="green" />
 					</Button>
 				</Link>
-				<Button
-					width="35px"
-					height="35px"
-					background="white"
-					padding="0px"
-					onClick={() => deleteUser(id)}
-				>
-					<RemoveIcon size="20px" color="red" />
-				</Button>
+				{role === '0' ? null : (
+					<Button
+						width="35px"
+						height="35px"
+						background="white"
+						padding="0px"
+						onClick={() => deleteUser(id)}
+					>
+						<RemoveIcon size="20px" color="red" />
+					</Button>
+				)}
 			</div>
 		</div>
 	);

@@ -26,7 +26,7 @@ async function register(login, password, email, phone) {
 }
 
 async function login(login, password) {
-	const user = await User.findOne({ login: login });
+	const user = await User.findOne({ login: login }).populate("cart");
 
 	if (!user) {
 		throw new Error("Пользаватель с таком логином не найден");

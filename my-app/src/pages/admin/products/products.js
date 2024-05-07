@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { request } from '../../../utils';
-import { AdminList } from '../../../components';
+import { ContainerBlock } from '../../../components';
 import { ProductItem } from './components';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../components';
@@ -28,7 +28,7 @@ const ProductsContainer = ({ className }) => {
 	}, [refresh]);
 
 	return (
-		<AdminList errorServer={errorServer} isLoading={isLoading}>
+		<ContainerBlock errorServer={errorServer} isLoading={isLoading}>
 			<div className={className}>
 				<div className="category-header">
 					<h2>Товары: {data.length}</h2>
@@ -50,7 +50,7 @@ const ProductsContainer = ({ className }) => {
 					);
 				})}
 			</div>
-		</AdminList>
+		</ContainerBlock>
 	);
 };
 

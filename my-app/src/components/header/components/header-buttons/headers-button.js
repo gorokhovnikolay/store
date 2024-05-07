@@ -7,6 +7,7 @@ import { ROLE_ID } from '../../../../constants/role';
 
 const HeaderButtonsContainer = ({ className }) => {
 	const roleId = useSelector(({ user }) => user.role);
+	const countCart = useSelector(({ user }) => user.cart.length);
 
 	const isDenied = Number(roleId) === ROLE_ID.ADMIN;
 
@@ -15,6 +16,9 @@ const HeaderButtonsContainer = ({ className }) => {
 			<Link to="/cart">
 				<Button width="50px" padding="7px">
 					<CartIcon size="36px" color="white" />
+					{countCart !== 0 && countCart !== undefined ? (
+						<span className="count">{countCart}</span>
+					) : null}
 				</Button>
 			</Link>
 			<Button width="50px" padding="0px">
@@ -41,5 +45,20 @@ export const HeaderButtons = styled(HeaderButtonsContainer)`
 	height: 50px;
 	& button {
 		margin-left: 5px;
+		position: relative;
+	}
+	& .count {
+		position: absolute;
+		top: -9px;
+		right: -8px;
+		background: #62bceb;
+		padding: 5px;
+		border-radius: 50%;
+		width: 25px;
+		height: 25px;
+		display: flex;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
 	}
 `;

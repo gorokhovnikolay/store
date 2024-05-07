@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AdminList, Tooltip } from '../../../components';
+import { ContainerBlock, Tooltip } from '../../../components';
 import { UserItem } from './components';
 
 import styled from 'styled-components';
@@ -27,7 +27,7 @@ const UsersContainer = ({ className }) => {
 	}, [refresh]);
 
 	return (
-		<AdminList errorServer={errorServer} isLoading={isLoading}>
+		<ContainerBlock errorServer={errorServer} isLoading={isLoading}>
 			<div className={className}>
 				<div className="user-header">
 					<h2>Клиенты</h2>
@@ -50,7 +50,7 @@ const UsersContainer = ({ className }) => {
 				})}
 			</div>
 			<Tooltip message={message} />
-		</AdminList>
+		</ContainerBlock>
 	);
 };
 

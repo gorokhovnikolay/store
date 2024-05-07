@@ -44,20 +44,15 @@ const CategoryAddContainer = ({ className }) => {
 		reset();
 	};
 
-	const loadOptions = (query, callback) => {
-		request('/admin/category')
-			.then(({ category }) => {
-				const options = category.map((row) => ({
-					label: row.name,
-					value: row.id,
-					data: row.color,
-				}));
-				callback(options);
-			})
-			.catch(({ error }) => {
-				console.error(error);
-				callback([]);
-			});
+	const loadOptions = async (inputValue, callback) => {
+		request('/admin/category').then(({ category }) => {
+			const options = category.map((row) => ({
+				label: row.name,
+				value: row.id,
+				data: row.color,
+			}));
+			callback(options);
+		});
 	};
 	return (
 		<div className={className}>
@@ -89,10 +84,18 @@ const CategoryAddContainer = ({ className }) => {
 						render={({ field }) => (
 							<AsyncSelect
 								{...field}
-								cacheOptions
+								classNamePrefix="react-custom"
 								isMulti={true}
-								loadOptions={loadOptions}
+								cacheOptions
 								defaultOptions
+								closeMenuOnSelect={false}
+								loadOptions={loadOptions}
+								theme={(theme) => {
+									return {
+										...theme,
+										borderRadius: '25px',
+									};
+								}}
 							/>
 						)}
 					/>

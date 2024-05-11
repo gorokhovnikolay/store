@@ -61,7 +61,6 @@ const ProductEditContainer = ({ className }) => {
 					console.log(error);
 					return;
 				}
-				console.log(product);
 			},
 		);
 		navigate(-1);

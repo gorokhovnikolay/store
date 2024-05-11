@@ -6,14 +6,17 @@ import { ModalCatalog } from '../../../modal-catalog/modal-catalog';
 import { modalContainerVisible } from '../../../../store/selectors';
 import { CloseIcon } from '../../../../assets/svg/close';
 import { CategoryList } from './components/category-list';
+import { useAppDispatch, useAppSelector } from '../../../../storeRtk/hooks.ts';
+import { modalVisible } from '../../../../storeRtk/slice/modal-catalog.ts';
 
 const CatalogButtonContainer = ({ className }) => {
-	const isModalVisible = useSelector(modalContainerVisible);
-	const dispatch = useDispatch();
+	const isModalVisible = useAppSelector((state) => state.modalCatalog.modalVisible);
+
+	const dispatch = useAppDispatch();
 	return (
 		<>
 			<div className={className}>
-				<Button onClick={() => dispatch({ type: 'MODAL_VISIBLE' })}>
+				<Button onClick={() => dispatch(modalVisible())}>
 					{isModalVisible ? <CloseIcon size="30px" /> : <BurgerMenu />}
 					Каталог
 				</Button>

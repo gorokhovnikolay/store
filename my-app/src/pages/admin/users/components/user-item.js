@@ -4,6 +4,8 @@ import { Button } from '../../../../components';
 import { EditIcon, RemoveIcon } from '../../../../assets/svg';
 import { Link } from 'react-router-dom';
 import { request } from '../../../../utils';
+import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
+import { closeModal, visibleModal } from '../../../../storeRtk/slice/modal.ts';
 
 const UserItemContainer = ({
 	className,
@@ -16,14 +18,13 @@ const UserItemContainer = ({
 	phone,
 	setRefresh,
 }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const deleteUser = (id) => {
-		dispatch({
-			type: 'VISIBLE_MODAL',
-			payload: {
+		dispatch(
+			visibleModal({
 				modal: true,
 				confirm: () => {
-					dispatch({ type: 'CLOSE_MODAL' });
+					dispatch(closeModal());
 					request(`/admin/users/${id}`, 'DELETE').then(({ message, error }) => {
 						if (error) {
 							setMessage(error);
@@ -33,9 +34,9 @@ const UserItemContainer = ({
 						setMessage(message);
 					});
 				},
-				cancel: () => dispatch({ type: 'CLOSE_MODAL' }),
-			},
-		});
+				cancel: () => dispatch(closeModal()),
+			}),
+		);
 	};
 	return (
 		<div className={className}>

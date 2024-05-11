@@ -17,7 +17,6 @@ export const userReducer = (state = initialState, { type, payload }) => {
 		case 'DELETE_PRODUCT_WITH_CART':
 			return { ...state, cart: payload.product };
 		case 'CREATE_ORDER':
-			console.log(payload);
 			return { ...state, orders: [...state.orders, payload.product], cart: [] };
 		default:
 			return state;

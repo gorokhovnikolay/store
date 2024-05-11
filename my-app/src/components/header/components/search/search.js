@@ -5,12 +5,14 @@ import { Button } from '../../../button/button';
 import { debounce } from '../../../../utils/debounce';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
+import { setPhrase } from '../../../../storeRtk/slice/search-phrase.ts';
 
 const SearchContainer = ({ className }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const setSearchPhrase = (phrase) => {
-		dispatch({ type: 'SEARCH_PHRASE', payload: phrase });
+		dispatch(setPhrase(phrase));
 	};
 
 	const debounceSearchPhrase = useRef(debounce(setSearchPhrase, 2000)).current;

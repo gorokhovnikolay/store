@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { request } from '../../utils';
-import { useSelector } from 'react-redux';
+import {request} from '../../utils/request'
+import { useAppSelector } from '../../storeRtk/hooks';
 import { Link } from 'react-router-dom';
-import { ContainerBlock } from '../../components';
+import { IProduct } from '../../types/types';
+import { ContainerBlock } from '../../components/admin-list/admin-list';
 
-const MainContainer = ({ className }) => {
-	const [products, setProducts] = useState([]);
+export const MainContainer:React.FC<{className:string}> = ({ className }) => {
+	const [products, setProducts] = useState<IProduct[]>([]);
 	const [errorServer, setErrorServer] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
-	const phrases = useSelector(({ searchPhrase }) => searchPhrase.phrase);
+	const phrases = useAppSelector(({ searchPhrase }) => searchPhrase.phrase);
 
 	useEffect(() => {
 		setIsLoading(true);
 		request(`/products?search=${phrases}`)
-			.then(({ error, products, lastPage }) => {
+			.then(({ error, products, lastPage }:{error:string,products:IProduct[],lastPage:number}) => {
 				if (error) {
 					setIsLoading(false);
 					setErrorServer(error);
@@ -26,8 +27,7 @@ const MainContainer = ({ className }) => {
 			.finally(() => setIsLoading(false));
 	}, [phrases]);
 
-	return (
-		<div className={className}>
+	return (<div className={className}>
 			<div className="main-baner">
 				<h1>Store - Интернет магазин качественных кед!!!</h1>
 			</div>
@@ -50,8 +50,8 @@ const MainContainer = ({ className }) => {
 					})}
 				</div>
 			</ContainerBlock>
-		</div>
-	);
+		</div>);
+
 };
 
 export const Main = styled(MainContainer)`

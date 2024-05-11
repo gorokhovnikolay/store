@@ -1,4 +1,5 @@
-export const request = (url, method, data) => {
+
+const request = (url:string, method?:string, data?:any):Promise<any> => {
 	return fetch(url, {
 		headers: {
 			'content-type': 'application/json',
@@ -7,3 +8,5 @@ export const request = (url, method, data) => {
 		body: data ? JSON.stringify(data) : null,
 	}).then((res) => res.json());
 };
+
+export {request}

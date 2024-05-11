@@ -4,16 +4,17 @@ import { Button } from '../../../../components';
 import { EditIcon, RemoveIcon } from '../../../../assets/svg';
 import { Link } from 'react-router-dom';
 import { request } from '../../../../utils';
+import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
+import { closeModal, visibleModal } from '../../../../storeRtk/slice/modal.ts';
 
 const CategoryItemContainer = ({ className, category, setRefresh }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const deleteCategory = () => {
-		dispatch({
-			type: 'VISIBLE_MODAL',
-			payload: {
+		dispatch(
+			visibleModal({
 				modal: true,
 				confirm: () => {
-					dispatch({ type: 'CLOSE_MODAL' });
+					dispatch(closeModal());
 					request(`/admin/category/${category.id}`, 'DELETE').then(
 						({ category, error }) => {
 							if (error) {
@@ -25,9 +26,9 @@ const CategoryItemContainer = ({ className, category, setRefresh }) => {
 						},
 					);
 				},
-				cancel: () => dispatch({ type: 'CLOSE_MODAL' }),
-			},
-		});
+				cancel: () => dispatch(closeModal()),
+			}),
+		);
 	};
 
 	return (

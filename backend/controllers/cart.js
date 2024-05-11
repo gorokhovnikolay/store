@@ -8,12 +8,12 @@ async function addProductToCart(id, product) {
 	if (checkUser.cart.filter((prod) => prod.id === product.id).length > 0) {
 		throw new Error("Такой товар уже есть в корзине");
 	}
-
 	const user = await User.findByIdAndUpdate(
 		{ _id: id },
 		{ $push: { cart: product.id } },
 		{ returnDocument: "after" }
 	).populate("cart");
+
 	return user.cart;
 }
 

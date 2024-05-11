@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FooterContainer = ({ className }) => {
+const FooterContainer:React.FC<{className:string}> = ({ className }) => {
 	return <div className={className}>FooterContainer</div>;
 };
 

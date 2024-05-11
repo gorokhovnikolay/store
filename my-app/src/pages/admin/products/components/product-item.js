@@ -4,20 +4,21 @@ import { Button } from '../../../../components';
 import { EditIcon, RemoveIcon } from '../../../../assets/svg';
 import { useDispatch } from 'react-redux';
 import { request } from '../../../../utils';
+import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
+import { closeModal, visibleModal } from '../../../../storeRtk/slice/modal.ts';
 
 const ProductItemContainer = ({
 	className,
 	product: { name, description, price, cat, image, id },
 	setRefresh,
 }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const deleteProduct = () => {
-		dispatch({
-			type: 'VISIBLE_MODAL',
-			payload: {
+		dispatch(
+			visibleModal({
 				modal: true,
 				confirm: () => {
-					dispatch({ type: 'CLOSE_MODAL' });
+					dispatch(closeModal());
 					request(`/admin/product/${id}`, 'DELETE').then(
 						({ message, error }) => {
 							if (error) {
@@ -29,9 +30,9 @@ const ProductItemContainer = ({
 						},
 					);
 				},
-				cancel: () => dispatch({ type: 'CLOSE_MODAL' }),
-			},
-		});
+				cancel: () => dispatch(closeModal()),
+			}),
+		);
 	};
 
 	return (

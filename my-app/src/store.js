@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from './storeRtk/hooks.ts';
 import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Header, Footer, Modal } from './components';
@@ -24,6 +25,7 @@ import {
 import { useEffect, useLayoutEffect } from 'react';
 import { Users } from './pages/admin';
 import { request } from './utils';
+import { setUser } from './storeRtk/slice/user.ts';
 
 const Content = styled.div`
 	text-align: center;
@@ -41,7 +43,7 @@ const App = styled.div`
 `;
 
 export const Store = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		request('/user').then(({ error, user }) => {
@@ -49,10 +51,10 @@ export const Store = () => {
 				console.log(error);
 				return;
 			}
-			dispatch({ type: 'LOGIN_USER', payload: user });
+
+			dispatch(setUser(user));
 		});
 	}, [dispatch]);
-
 	return (
 		<App>
 			<Header />

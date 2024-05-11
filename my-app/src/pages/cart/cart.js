@@ -1,11 +1,12 @@
 import { Button } from '../../components/';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncDeleteProduct, asyncArrangeOrder } from '../../store/actions';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useAppDispatch } from '../../storeRtk/hooks.ts';
+import { asyncDeleteProduct, asyncArrangeOrder } from '../../storeRtk/slice/user.ts';
 
 const CartContainer = ({ className }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const products = useSelector(({ user }) => user.cart);
 

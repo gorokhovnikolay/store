@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { request } from '../../utils';
 import { Button, ContainerBlock } from '../../components';
 import { useDispatch } from 'react-redux';
-import { asyncAddProductToCart } from '../../store/actions';
+import { asyncAddProductToCart } from '../../storeRtk/slice/user.ts';
+import { useAppDispatch } from '../../storeRtk/hooks.ts';
 
 const ProductContainer = ({ className }) => {
 	const { productId } = useParams();
@@ -12,7 +13,7 @@ const ProductContainer = ({ className }) => {
 	const [errorServer, setErrorServer] = useState();
 	const [isLoading, setIsLoading] = useState();
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -29,9 +30,7 @@ const ProductContainer = ({ className }) => {
 	}, [productId]);
 
 	const addCart = () => {
-		dispatch(asyncAddProductToCart({ product })).then(({ message }) =>
-			console.log(message),
-		);
+		dispatch(asyncAddProductToCart({ product }));
 	};
 
 	return (

@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useAppDispatch, useAppSelector } from './storeRtk/hooks.ts';
+import { useAppDispatch } from './storeRtk/hooks.ts';
 import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Header, Footer, Modal } from './components';
@@ -14,7 +13,6 @@ import {
 	Cart,
 } from './pages';
 import {
-	AddUser,
 	CategoryAdd,
 	Categorys,
 	ProductAdd,
@@ -22,7 +20,7 @@ import {
 	ProductEdit,
 	Orders,
 } from './pages/admin';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { Users } from './pages/admin';
 import { request } from './utils';
 import { setUser } from './storeRtk/slice/user.ts';
@@ -74,7 +72,6 @@ export const Store = () => {
 						<Route index element={<Admin />} />
 						<Route path="users" element={<Users />} />
 						<Route path="users/edit/:id" element={<EditUser />} />
-						<Route path="users/add/:roleId" element={<AddUser />} />
 						<Route path="personal/edit/:id" element={<EditUser />} />
 						<Route path="orders" element={<Orders />} />
 						<Route path="categoryes" element={<Categorys />} />

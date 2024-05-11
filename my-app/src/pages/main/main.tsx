@@ -11,7 +11,7 @@ export const MainContainer:React.FC<{className:string}> = ({ className }) => {
 	const [errorServer, setErrorServer] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
-	const phrases = useAppSelector(({ searchPhrase }) => searchPhrase.phrase);
+	const phrases = useAppSelector((state) => state.searchPhrase.phrase);
 
 	useEffect(() => {
 		setIsLoading(true);

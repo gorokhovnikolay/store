@@ -14,7 +14,7 @@ export const phraseSlice = createSlice({
 	initialState,
 	reducers: {
 		setPhrase: (state,action)=>{
-			return state.phrase = action.payload
+			return {...state, phrase: action.payload}
 		}
 	}
 })

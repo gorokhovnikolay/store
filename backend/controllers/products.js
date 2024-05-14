@@ -1,7 +1,7 @@
 const { Types } = require("mongoose");
 const Product = require("../models/Products");
 
-async function getProducts(search = "", limit = 12, page = 1, catId) {
+async function getProducts(search = "", limit = 8, page = 1, catId) {
 	const [products, count] = await Promise.all([
 		await Product.find({
 			name: { $regex: search, $options: "i" },

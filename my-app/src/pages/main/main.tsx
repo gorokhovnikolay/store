@@ -5,34 +5,43 @@ import { useAppSelector } from '../../storeRtk/hooks';
 import { Link } from 'react-router-dom';
 import { IProduct } from '../../types/types';
 import { ContainerBlock } from '../../components/admin-list/admin-list';
+import { Paginations } from './component/paginations';
 
 export const MainContainer:React.FC<{className:string}> = ({ className }) => {
 	const [products, setProducts] = useState<IProduct[]>([]);
 	const [errorServer, setErrorServer] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+	const [limit,setLimit] = useState(8)
+	const [page,setPage] = useState(1)
+	const [lastPage,setLastpage] = useState(1)
 
 	const phrases = useAppSelector((state) => state.searchPhrase.phrase);
 
 	useEffect(() => {
 		setIsLoading(true);
-		request(`/products?search=${phrases}`)
+		request(`/products?search=${phrases}&limit=${limit}&page=${page}`)
 			.then(({ error, products, lastPage }:{error:string,products:IProduct[],lastPage:number}) => {
+
 				if (error) {
 					setIsLoading(false);
 					setErrorServer(error);
+
 					return;
 				}
 				setProducts(products);
+				setLastpage(lastPage)
 			})
 			.finally(() => setIsLoading(false));
-	}, [phrases]);
+	}, [phrases,limit,page]);
 
 	return (<div className={className}>
 			<div className="main-baner">
 				<h1>Store - Интернет магазин качественных кед!!!</h1>
 			</div>
 			<ContainerBlock errorServer={errorServer} isLoading={isLoading}>
+			<h2>Все кеды в одном месте:</h2>
 				<div className="main-products">
+
 					{products.map((product) => {
 						return (
 							<Link
@@ -49,6 +58,7 @@ export const MainContainer:React.FC<{className:string}> = ({ className }) => {
 						);
 					})}
 				</div>
+				<Paginations setPage={setPage} page={page} lastPage={lastPage}/>
 			</ContainerBlock>
 		</div>);
 

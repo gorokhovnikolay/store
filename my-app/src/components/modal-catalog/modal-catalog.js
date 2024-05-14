@@ -15,6 +15,7 @@ export const ModalCatalog = styled(ModalContainer)`
 	left: 0;
 	right: 0;
 	background: #000000b3;
+	z-index: 9;
 	@media (max-width: 1190px) {
 		& .modal-container {
 			left: 10px !important;

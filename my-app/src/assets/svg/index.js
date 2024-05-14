@@ -9,3 +9,8 @@ export * from './right-arrow';
 export * from './close';
 export * from './edit';
 export * from './remove';
+export * from './home';
+export * from './users.tsx';
+export * from './orders.tsx';
+export * from './categories.tsx';
+export * from './shoes.tsx';

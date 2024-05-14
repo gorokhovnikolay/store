@@ -106,7 +106,6 @@ const ProductEditContainer = ({ className }) => {
 							control={control}
 							name="category"
 							render={({ field }) => {
-								console.log(field);
 								return (
 									<AsyncSelect
 										{...field}

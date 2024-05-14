@@ -1,6 +1,18 @@
 import { useSelector } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import {
+	CategoriesIcon,
+	HomeIcon,
+	OrdersIcon,
+	ShoesIcon,
+	UsersIcon,
+} from '../../assets/svg';
+
+const sizes = {
+	size: '23px',
+	color: 'black',
+};
 
 const AdminContainer = ({ className }) => {
 	const role = useSelector(({ user }) => user.role);
@@ -10,20 +22,35 @@ const AdminContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<div className="right-panel">
-				<div>
-					<Link to="/admin">Главная</Link>
+				<div className="panel-item">
+					<Link to="/admin">
+						<HomeIcon {...sizes} />
+						<span className="item-title">Главная</span>
+					</Link>
 				</div>
-				<div>
-					<Link to="users">Клиенты</Link>
+				<div className="panel-item">
+					<Link to="users">
+						<UsersIcon {...sizes} />
+						<span className="item-title">Клиенты</span>
+					</Link>
 				</div>
-				<div>
-					<Link to="orders">Заказы</Link>
+				<div className="panel-item">
+					<Link to="orders">
+						<OrdersIcon {...sizes} />
+						<span className="item-title">Заказы</span>
+					</Link>
 				</div>
-				<div>
-					<Link to="categoryes">Категории</Link>
+				<div className="panel-item">
+					<Link to="categoryes">
+						<CategoriesIcon {...sizes} />
+						<span className="item-title">Категории</span>
+					</Link>
 				</div>
-				<div>
-					<Link to="products">Продукты</Link>
+				<div className="panel-item">
+					<Link to="products">
+						<ShoesIcon {...sizes} />
+						<span className="item-title">Продукты</span>
+					</Link>
 				</div>
 			</div>
 			<div className="left-panel">
@@ -51,5 +78,19 @@ export const Admin = styled(AdminContainer)`
 		border-radius: 25px;
 		padding: 25px;
 		text-align: start;
+	}
+	& .panel-item {
+		display: flex;
+		align-items: center;
+		margin: 5px 0;
+		padding: 2px 2px;
+	}
+	& .panel-item:hover {
+		background-color: white;
+		border-radius: 12px;
+	}
+	& .item-title {
+		margin-left: 5px;
+		font-size: 17px;
 	}
 `;

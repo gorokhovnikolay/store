@@ -38,7 +38,7 @@ const CategoryAddContainer = ({ className }) => {
 				console.log(error);
 				return;
 			}
-			console.log(product);
+			// console.log(product);
 		});
 		navigate(-1);
 		reset();
@@ -80,7 +80,7 @@ const CategoryAddContainer = ({ className }) => {
 
 					<Controller
 						control={control}
-						name="category"
+						name="cat"
 						render={({ field }) => (
 							<AsyncSelect
 								{...field}

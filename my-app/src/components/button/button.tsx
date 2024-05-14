@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const ButtonContainer = ({ className, children, ...props }) => {
+interface ButtonContainerProps{
+		[x: string]: any;
+		className: string;
+		children: React.ReactNode;
+}
+
+const ButtonContainer:React.FC<ButtonContainerProps> = ({ className, children, ...props }) => {
 	return (
 		<button className={className} {...props}>
 			{children}

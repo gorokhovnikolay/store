@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from './storeRtk/hooks.ts';
 import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Header, Footer, Modal } from './components';
@@ -13,7 +13,6 @@ import {
 	Cart,
 } from './pages';
 import {
-	AddUser,
 	CategoryAdd,
 	Categorys,
 	ProductAdd,
@@ -21,9 +20,10 @@ import {
 	ProductEdit,
 	Orders,
 } from './pages/admin';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import { Users } from './pages/admin';
 import { request } from './utils';
+import { setUser } from './storeRtk/slice/user.ts';
 
 const Content = styled.div`
 	text-align: center;
@@ -41,7 +41,7 @@ const App = styled.div`
 `;
 
 export const Store = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		request('/user').then(({ error, user }) => {
@@ -49,10 +49,10 @@ export const Store = () => {
 				console.log(error);
 				return;
 			}
-			dispatch({ type: 'LOGIN_USER', payload: user });
+
+			dispatch(setUser(user));
 		});
 	}, [dispatch]);
-
 	return (
 		<App>
 			<Header />
@@ -72,7 +72,6 @@ export const Store = () => {
 						<Route index element={<Admin />} />
 						<Route path="users" element={<Users />} />
 						<Route path="users/edit/:id" element={<EditUser />} />
-						<Route path="users/add/:roleId" element={<AddUser />} />
 						<Route path="personal/edit/:id" element={<EditUser />} />
 						<Route path="orders" element={<Orders />} />
 						<Route path="categoryes" element={<Categorys />} />

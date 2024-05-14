@@ -3,15 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { CatalogButton, HeaderButtons, Search } from './components';
 import { Link, useNavigate } from 'react-router-dom';
 import { request } from '../../utils';
+import { useAppDispatch, useAppSelector } from '../../storeRtk/hooks.ts';
+import { logOut } from '../../storeRtk/slice/user.ts';
 
 const HeaderContainer = ({ className }) => {
-	const dispatch = useDispatch();
-	const userName = useSelector(({ user }) => user.login);
+	const dispatch = useAppDispatch();
+	const userName = useAppSelector((state) => state.user.login);
 	const navigate = useNavigate();
-	const logOut = () => {
+	const logOutClick = () => {
 		request('/logout', 'POST').then(({ error, user }) => {
 			localStorage.removeItem('user');
-			dispatch({ type: 'LOG_OUT' });
+			dispatch(logOut());
 			navigate('/');
 		});
 	};
@@ -24,7 +26,7 @@ const HeaderContainer = ({ className }) => {
 				</div>
 				<div>
 					{userName ? (
-						<div onClick={logOut}>{userName}</div>
+						<div onClick={logOutClick}>{userName}</div>
 					) : (
 						<Link to="/login">Войти</Link>
 					)}

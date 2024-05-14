@@ -61,7 +61,6 @@ const ProductEditContainer = ({ className }) => {
 					console.log(error);
 					return;
 				}
-				console.log(product);
 			},
 		);
 		navigate(-1);
@@ -107,7 +106,6 @@ const ProductEditContainer = ({ className }) => {
 							control={control}
 							name="category"
 							render={({ field }) => {
-								console.log(field);
 								return (
 									<AsyncSelect
 										{...field}

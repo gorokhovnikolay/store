@@ -7,6 +7,8 @@ import { Button, Input } from '../../components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../storeRtk/hooks.ts';
+import { setUser } from '../../storeRtk/slice/user.ts';
 import { request } from '../../utils';
 
 const regShemaYup = yup.object().shape({
@@ -32,7 +34,7 @@ const regShemaYup = yup.object().shape({
 const RegisterContainer = ({ className }) => {
 	const [serverError, setServerError] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const {
 		register,
@@ -60,7 +62,7 @@ const RegisterContainer = ({ className }) => {
 					return;
 				}
 				setServerError('');
-				dispatch({ type: 'LOGIN_USER', payload: user });
+				dispatch(setUser(user));
 				navigate('/');
 				setIsLoading(false);
 			},

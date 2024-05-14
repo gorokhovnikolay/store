@@ -8,6 +8,8 @@ import { Button, Input } from '../../components';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { request } from '../../utils';
+import { useAppDispatch } from '../../storeRtk/hooks.ts';
+import { setUser } from '../../storeRtk/slice/user.ts';
 
 const loginShemaYup = yup.object().shape({
 	login: yup
@@ -27,7 +29,7 @@ const loginShemaYup = yup.object().shape({
 const LoginContainer = ({ className }) => {
 	const [serverErorr, setServerError] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const {
 		register,
@@ -53,7 +55,7 @@ const LoginContainer = ({ className }) => {
 			}
 			setServerError('');
 			setIsLoading(false);
-			dispatch({ type: 'LOGIN_USER', payload: user });
+			dispatch(setUser(user));
 			navigate('/');
 		});
 	};

@@ -20,9 +20,9 @@ router.patch("/", authenticated, async (req, res) => {
 
 router.patch("/delete/:id", authenticated, async (req, res) => {
 	try {
-		console.log(req.params.id);
 		const { id } = req.user;
 		const cartProduct = await deleteProductWithCart(id, req.params.id);
+
 		res.send({ cartProducts: cartProduct, error: null });
 	} catch (e) {
 		res.send({ cartProduct: null, error: e.message });

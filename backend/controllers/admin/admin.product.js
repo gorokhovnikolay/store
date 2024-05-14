@@ -12,12 +12,13 @@ async function getProductById(id) {
 }
 
 async function createProduct(name, description, price, image, cat) {
+	const categoriesId = cat.map((item) => item.value);
 	const newProduct = await Product.create({
 		name,
 		description,
 		price,
 		image,
-		cat,
+		cat: categoriesId,
 	});
 	await newProduct.populate("cat");
 	return newProduct;

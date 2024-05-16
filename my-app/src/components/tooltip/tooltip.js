@@ -7,10 +7,10 @@ const TooltipContainer = ({ messages, className }) => {
 
 	return (
 		<div className={className}>
-			{messages.map(({ id, message }) => {
+			{messages.map(({ id = '0', message }) => {
 				return (
 					<div key={id} className="tool-tip">
-						{message}
+						{id}:{message}
 						<button onClick={() => dispatch(deleteMessage(id))}>x</button>
 					</div>
 				);

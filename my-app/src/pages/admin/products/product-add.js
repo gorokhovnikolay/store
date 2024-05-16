@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input } from '../../../components';
 import { request } from '../../../utils';
+import { useAppDispatch } from '../../../storeRtk/hooks';
+import { addMessage } from '../../../storeRtk/slice/message-reducer';
 
 const addCarShema = yup.object().shape({
 	name: yup.string().required(),
@@ -31,11 +33,11 @@ const CategoryAddContainer = ({ className }) => {
 		resolver: yupResolver(addCarShema),
 	});
 	const navigate = useNavigate();
-
+	const dispatch = useAppDispatch();
 	const onSubmit = (product) => {
 		request('/admin/product', 'POST', product).then(({ error, product }) => {
 			if (error) {
-				console.log(error);
+				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;
 			}
 			// console.log(product);

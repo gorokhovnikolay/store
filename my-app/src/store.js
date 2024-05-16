@@ -22,7 +22,7 @@ import {
 	Orders,
 	MainAdmin,
 } from './pages/admin';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Users } from './pages/admin';
 import { request } from './utils';
 import { setUser } from './storeRtk/slice/user.ts';

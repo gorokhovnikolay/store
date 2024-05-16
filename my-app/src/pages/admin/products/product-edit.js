@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, ContainerBlock, Input } from '../../../components';
 import { request } from '../../../utils';
+import { useAppDispatch } from '../../../storeRtk/hooks';
+import { addMessage } from '../../../storeRtk/slice/message-reducer';
 
 const addCarShema = yup.object().shape({
 	name: yup.string().required(),
@@ -16,6 +18,7 @@ const addCarShema = yup.object().shape({
 
 const ProductEditContainer = ({ className }) => {
 	const { id } = useParams();
+	const dispatch = useAppDispatch();
 	const {
 		register,
 		handleSubmit,
@@ -58,7 +61,7 @@ const ProductEditContainer = ({ className }) => {
 		request(`/admin/product/${id}`, 'PATCH', formatProduct(product)).then(
 			({ error, product }) => {
 				if (error) {
-					console.log(error);
+					dispatch(addMessage({ id: Date.now(), message: error }));
 					return;
 				}
 			},

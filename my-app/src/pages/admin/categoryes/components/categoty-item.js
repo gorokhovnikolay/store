@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
 import { Button } from '../../../../components';
 import { EditIcon, RemoveIcon } from '../../../../assets/svg';
 import { Link } from 'react-router-dom';
 import { request } from '../../../../utils';
 import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
 import { closeModal, visibleModal } from '../../../../storeRtk/slice/modal.ts';
+import { addMessage } from '../../../../storeRtk/slice/message-reducer.ts';
 
 const CategoryItemContainer = ({ className, category, setRefresh }) => {
 	const dispatch = useAppDispatch();
@@ -18,7 +18,7 @@ const CategoryItemContainer = ({ className, category, setRefresh }) => {
 					request(`/admin/category/${category.id}`, 'DELETE').then(
 						({ category, error }) => {
 							if (error) {
-								console.log(error);
+								dispatch(addMessage({ id: Date.now(), message: error }));
 								return;
 							}
 							console.log(category);

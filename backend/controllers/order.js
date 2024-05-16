@@ -2,7 +2,10 @@ const Order = require("../models/Orders");
 const User = require("../models/User");
 
 async function getOrders() {
-	const orders = await Order.find().populate("user").populate("product");
+	const orders = await Order.find()
+		.populate("user")
+		.populate("product")
+		.sort({ createdAt: -1 });
 	return orders;
 }
 

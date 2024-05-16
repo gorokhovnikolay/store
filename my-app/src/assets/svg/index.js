@@ -14,3 +14,4 @@ export * from './users.tsx';
 export * from './orders.tsx';
 export * from './categories.tsx';
 export * from './shoes.tsx';
+export * from './exit.tsx';

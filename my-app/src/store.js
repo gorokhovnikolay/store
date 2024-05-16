@@ -1,7 +1,7 @@
-import { useAppDispatch } from './storeRtk/hooks.ts';
+import { useAppDispatch, useAppSelector } from './storeRtk/hooks.ts';
 import { Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { Header, Footer, Modal } from './components';
+import { Header, Footer, Modal, Tooltip } from './components';
 import {
 	Admin,
 	CategoryPage,
@@ -11,6 +11,7 @@ import {
 	Main,
 	Product,
 	Cart,
+	Successorder,
 } from './pages';
 import {
 	CategoryAdd,
@@ -19,11 +20,13 @@ import {
 	Products,
 	ProductEdit,
 	Orders,
+	MainAdmin,
 } from './pages/admin';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Users } from './pages/admin';
 import { request } from './utils';
 import { setUser } from './storeRtk/slice/user.ts';
+import { addMessage } from './storeRtk/slice/message-reducer.ts';
 
 const Content = styled.div`
 	text-align: center;
@@ -43,10 +46,12 @@ const App = styled.div`
 export const Store = () => {
 	const dispatch = useAppDispatch();
 
+	const message = useAppSelector((state) => state.errorMessage);
+
 	useEffect(() => {
 		request('/user').then(({ error, user }) => {
 			if (error) {
-				console.log(error);
+				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;
 			}
 
@@ -67,9 +72,9 @@ export const Store = () => {
 					<Route path="/category/:catId" element={<CategoryPage />} />
 					<Route path="/cart" element={<Cart />} />
 					<Route path="/acceptorder" element={<div>post id</div>} />
-					<Route path="/successorder" element={<div>post id</div>} />
+					<Route path="/successorder" element={<Successorder />} />
 					<Route path="/admin" element={<Admin />}>
-						<Route index element={<Admin />} />
+						<Route index element={<MainAdmin />} />
 						<Route path="users" element={<Users />} />
 						<Route path="users/edit/:id" element={<EditUser />} />
 						<Route path="personal/edit/:id" element={<EditUser />} />
@@ -81,11 +86,12 @@ export const Store = () => {
 						<Route path="products/edit/:id" element={<ProductEdit />} />
 						<Route path="products/add" element={<ProductAdd />} />
 					</Route>
-					<Route path="*" element={<div>Ошибка</div>} />
+					<Route path="*" element={<div>Такой страницы не существует</div>} />
 				</Routes>
 			</Content>
 			<Footer />
 			<Modal />
+			{message && <Tooltip messages={message} />}
 		</App>
 	);
 };

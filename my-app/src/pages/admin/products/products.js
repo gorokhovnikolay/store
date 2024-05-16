@@ -7,6 +7,7 @@ import { Button } from '../../../components';
 import { UserIcon } from '../../../assets/svg';
 import styled from 'styled-components';
 import { debounce } from '../../../utils/debounce';
+import { Paginations } from '../../main/component/paginations';
 
 const ProductsContainer = ({ className }) => {
 	const [refresh, setRefresh] = useState(true);
@@ -14,22 +15,28 @@ const ProductsContainer = ({ className }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [errorServer, setErrorServer] = useState('');
 	const [phrase, setPhrase] = useState('');
+	const [page, setPage] = useState(1);
+	const [limit, setLimit] = useState(8);
+	const [lastPage, setLastPage] = useState(1);
+	const [allProductsCount, setAllProductsCount] = useState(1);
 
 	const debounseFn = useRef(debounce(setPhrase, 2000)).current;
 
 	useEffect(() => {
 		setIsLoading(true);
-		request('/admin/product')
-			.then(({ error, product }) => {
+		request(`/admin/product?phrase=${phrase}&page=${page}&limit=${limit}`)
+			.then(({ error, product, lastPage, allCount }) => {
 				if (error) {
 					setIsLoading(false);
 					setErrorServer(error);
 					return;
 				}
 				setData(product);
+				setLastPage(lastPage);
+				setAllProductsCount(allCount);
 			})
 			.finally(() => setIsLoading(false));
-	}, [refresh]);
+	}, [refresh, page, limit, phrase]);
 
 	const changeSearchPhrase = (e) => {
 		debounseFn(e.target.value);
@@ -39,7 +46,15 @@ const ProductsContainer = ({ className }) => {
 		<ContainerBlock errorServer={errorServer} isLoading={isLoading}>
 			<div className={className}>
 				<div className="category-header">
-					<h2>Товары: {data.length}</h2>
+					<h2>Товары: {allProductsCount}</h2>
+					<select
+						defaultValue={limit}
+						onChange={({ target }) => setLimit(Number(target.value))}
+					>
+						<option value={'8'}>8</option>
+						<option value={'16'}>16</option>
+						<option value={'32'}>32</option>
+					</select>
 					<Input
 						placeholder="Поиск по наименованию..."
 						id="search"
@@ -63,6 +78,7 @@ const ProductsContainer = ({ className }) => {
 					);
 				})}
 			</div>
+			<Paginations page={page} setPage={setPage} lastPage={lastPage} />
 		</ContainerBlock>
 	);
 };

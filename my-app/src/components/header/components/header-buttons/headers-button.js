@@ -3,12 +3,12 @@ import { Button } from '../../../button/button';
 import { CartIcon, UserIcon, HeartIcon, SettingsIcon } from '../../../../assets/svg';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../../storeRtk/hooks';
 import { ROLE_ID } from '../../../../constants/role';
 
 const HeaderButtonsContainer = ({ className }) => {
-	const roleId = useSelector(({ user }) => user.role);
-	const countCart = useSelector(({ user }) => user.cart.length);
-
+	const roleId = useAppSelector(({ user }) => user.role);
+	const countCart = useAppSelector(({ user }) => user?.cart?.length);
 	const isDenied = Number(roleId) === ROLE_ID.ADMIN;
 
 	return (

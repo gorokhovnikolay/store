@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { request } from '../../utils';
 import { Button, ContainerBlock } from '../../components';
-import { useDispatch } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../storeRtk/hooks.ts';
 import { asyncAddProductToCart } from '../../storeRtk/slice/user.ts';
-import { useAppDispatch } from '../../storeRtk/hooks.ts';
 
 const ProductContainer = ({ className }) => {
 	const { productId } = useParams();
@@ -14,6 +13,8 @@ const ProductContainer = ({ className }) => {
 	const [isLoading, setIsLoading] = useState();
 
 	const dispatch = useAppDispatch();
+	const roleId = useAppSelector(({ user }) => user.role);
+	const isNotGuest = /^\d+$/.test(roleId);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -47,7 +48,13 @@ const ProductContainer = ({ className }) => {
 						width="150px"
 						height="50px"
 						background="green"
+						disabled={!isNotGuest}
 						onClick={addCart}
+						title={
+							isNotGuest
+								? 'Добавить в корзину'
+								: 'Авторизуйтесь чтобы оформить заказ'
+						}
 					>
 						Купить
 					</Button>

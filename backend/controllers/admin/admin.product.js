@@ -1,7 +1,18 @@
 const Product = require("../../models/Products");
 
-function getProduct() {
-	return Product.find().populate("cat");
+async function getProduct(phrase = "", page = 1, limit = 8) {
+	const [products, count, allCount] = await Promise.all([
+		await Product.find({ name: { $regex: phrase, $options: "i" } })
+			.populate("cat")
+			.limit(limit)
+			.skip((page - 1) * limit),
+		await Product.countDocuments({
+			name: { $regex: phrase, $options: "i" },
+		}),
+		await Product.countDocuments(),
+	]);
+
+	return { products, lastPage: Math.ceil(count / limit), allCount };
 }
 
 async function getProductById(id) {

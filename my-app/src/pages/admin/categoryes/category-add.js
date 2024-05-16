@@ -42,6 +42,7 @@ const CategoryAddContainer = ({ className }) => {
 					({ error, category }) => {
 						if (error) {
 							console.log(error);
+
 							return;
 						}
 						console.log(category);

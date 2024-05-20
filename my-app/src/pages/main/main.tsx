@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import {request} from '../../utils/request'
 import { useAppSelector } from '../../storeRtk/hooks';
@@ -6,6 +6,13 @@ import { Link } from 'react-router-dom';
 import { IProduct } from '../../types/types';
 import { ContainerBlock } from '../../components/admin-list/admin-list';
 import { Paginations } from './component/paginations';
+import { Titles } from '../../components/titles/titles';
+
+const titles = [
+		'Store - Интернет магазин качественных кед!!!',
+		'Store - Большой выбор - приятные цены',
+		'Store - Напишите нам если не нашли что искали',
+		]
 
 export const MainContainer:React.FC<{className:string}> = ({ className }) => {
 	const [products, setProducts] = useState<IProduct[]>([]);
@@ -34,14 +41,14 @@ export const MainContainer:React.FC<{className:string}> = ({ className }) => {
 			.finally(() => setIsLoading(false));
 	}, [phrases,limit,page]);
 
+
+
+
 	return (<div className={className}>
-			<div className="main-baner">
-				<h1>Store - Интернет магазин качественных кед!!!</h1>
-			</div>
+			<Titles titles={titles} delay={3000} />
 			<ContainerBlock errorServer={errorServer} isLoading={isLoading}>
 			<h2>Все кеды в одном месте:</h2>
 				<div className="main-products">
-
 					{products.map((product) => {
 						return (
 							<Link
@@ -71,21 +78,7 @@ export const Main = styled(MainContainer)`
 		justify-content: space-between;
 		align-items: center;
 	}
-	& .main-baner {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 250px;
-		background: red;
-		border-radius: 25px;
-		margin-bottom: 25px;
-	}
-	& .main-baner h1 {
-		color: white;
-		font-size: 40px;
-		font-weight: 900;
-	}
+
 	& .product-card {
 		border: 1px solid gray;
 		border-radius: 25px;

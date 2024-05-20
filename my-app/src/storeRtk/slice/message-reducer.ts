@@ -16,7 +16,6 @@ const errorMessageSlice = createSlice({
 			return [...state,action.payload]
 		},
 		deleteMessage: (state,action)=>{
-			console.log(...state)
 			return state.filter((message)=>message.id !== action.payload)
 		}
 	},

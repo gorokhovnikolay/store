@@ -7,7 +7,10 @@ const TooltipContainer = ({ messages, className }) => {
 
 	return (
 		<div className={className}>
-			{messages.map(({ id = '0', message }) => {
+			{messages?.map(({ id = '0', message }) => {
+				setTimeout(() => {
+					dispatch(deleteMessage(id));
+				}, [3000]);
 				return (
 					<div key={id} className="tool-tip">
 						{id}:{message}

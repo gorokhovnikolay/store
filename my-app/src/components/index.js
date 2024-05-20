@@ -6,3 +6,4 @@ export * from './modal-catalog/modal-catalog';
 export * from './modal/modal';
 export * from './admin-list/admin-list';
 export * from './tooltip/tooltip';
+export * from './titles/titles';

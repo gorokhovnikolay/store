@@ -58,8 +58,15 @@ export const Store = () => {
 			dispatch(setUser(user));
 		});
 	}, [dispatch]);
+
+	const exitPage = (e) => {
+		if (e.pageY <= 2) {
+			console.log('Вы покидаете страницу');
+		}
+	};
+
 	return (
-		<App>
+		<App onMouseMove={(e) => exitPage(e)}>
 			<Header />
 			<Content>
 				<Routes>

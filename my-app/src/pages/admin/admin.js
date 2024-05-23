@@ -16,9 +16,11 @@ const sizes = {
 
 const AdminContainer = ({ className }) => {
 	const role = useSelector(({ user }) => user.role);
+
 	if (Number(role) !== 0) {
 		return <div> У вас нет прав доступа к данному разделу </div>;
 	}
+
 	return (
 		<div className={className}>
 			<div className="right-panel">
@@ -49,7 +51,7 @@ const AdminContainer = ({ className }) => {
 				<div className="panel-item">
 					<Link to="products">
 						<ShoesIcon {...sizes} />
-						<span className="item-title">Продукты</span>
+						<span className="item-title">Товары</span>
 					</Link>
 				</div>
 			</div>
@@ -83,7 +85,11 @@ export const Admin = styled(AdminContainer)`
 		display: flex;
 		align-items: center;
 		margin: 5px 0;
-		padding: 2px 2px;
+	}
+	& .panel-item a {
+		display: flex;
+		align-items: center;
+		padding: 6px;
 	}
 	& .panel-item:hover {
 		background-color: white;

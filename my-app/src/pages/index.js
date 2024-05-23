@@ -6,3 +6,5 @@ export * from './admin/users/edit-user';
 export * from './main/main';
 export * from './product/product';
 export * from './cart/cart';
+export * from './successorder/successorder';
+export * from './personal/personal';

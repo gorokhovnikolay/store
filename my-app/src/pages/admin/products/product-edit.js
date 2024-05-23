@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import AsyncSelect from 'react-select/async';
@@ -6,16 +7,19 @@ import styled from 'styled-components';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, ContainerBlock, Input } from '../../../components';
 import { request } from '../../../utils';
+import { useAppDispatch } from '../../../storeRtk/hooks';
+import { addMessage } from '../../../storeRtk/slice/message-reducer';
 
 const addCarShema = yup.object().shape({
-	name: yup.string().required(),
-	image: yup.string().required(),
-	price: yup.number().required(),
-	description: yup.string(),
+	name: yup.string().required('Введите название товара'),
+	image: yup.string().required('Введите URL изображения товара'),
+	price: yup.number().required('Введите стоимость товара'),
+	description: yup.string().required('Введите описание товара'),
 });
 
 const ProductEditContainer = ({ className }) => {
 	const { id } = useParams();
+	const dispatch = useAppDispatch();
 	const {
 		register,
 		handleSubmit,
@@ -58,7 +62,7 @@ const ProductEditContainer = ({ className }) => {
 		request(`/admin/product/${id}`, 'PATCH', formatProduct(product)).then(
 			({ error, product }) => {
 				if (error) {
-					console.log(error);
+					dispatch(addMessage({ id: Date.now(), message: error }));
 					return;
 				}
 			},
@@ -76,6 +80,18 @@ const ProductEditContainer = ({ className }) => {
 			callback(options);
 		});
 	};
+
+	const formErrors =
+		errors?.name?.message ||
+		errors?.description?.message ||
+		errors?.image?.message ||
+		errors?.price?.message;
+
+	useEffect(() => {
+		if (formErrors) {
+			dispatch(addMessage({ id: Date.now(), message: formErrors }));
+		}
+	}, [formErrors, dispatch]);
 
 	return (
 		<ContainerBlock>

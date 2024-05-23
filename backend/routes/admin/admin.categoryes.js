@@ -40,6 +40,7 @@ router.post("/", authenticated, hasRole([role.ADMIN]), async (req, res) => {
 		);
 		res.send({ error: null, category: categoryMap(category) });
 	} catch (e) {
+		console.log(e);
 		res.send({ error: e.message, category: null });
 	}
 });

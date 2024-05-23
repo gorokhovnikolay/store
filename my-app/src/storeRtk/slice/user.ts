@@ -35,15 +35,14 @@ interface UserState {
 	login: null | string,
 	roleId: null | number,
 	cart: IProduct[],
-	orders: IProduct[],
+
 }
 
 const initialState: UserState = {
 	id: null,
 	login: null,
 	roleId: null,
-	cart: [],
-	orders: [],
+	cart: []
 }
 
 export const userSlice = createSlice({
@@ -60,14 +59,13 @@ export const userSlice = createSlice({
 	extraReducers: (builder)=>{
 		builder
 		.addCase(asyncAddProductToCart.fulfilled,(state,action)=>{
-
 			return state = {...state, cart: action.payload}
 		})
 		.addCase(asyncDeleteProduct.fulfilled,(state,action)=>{
 			return state = {...state, cart: action.payload}
 		})
 		.addCase(asyncArrangeOrder.fulfilled,(state,action)=>{
-			return state = {...state, orders: action.payload,cart:[]}
+			return state = {...state,cart:[]}
 		})
 
 	}

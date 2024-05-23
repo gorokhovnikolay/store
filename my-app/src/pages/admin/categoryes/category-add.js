@@ -1,18 +1,23 @@
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Input } from '../../../components';
 import { request } from '../../../utils';
+import { useAppDispatch } from '../../../storeRtk/hooks';
+import { addMessage } from '../../../storeRtk/slice/message-reducer';
+import { useEffect } from 'react';
 
 const addCarShema = yup.object().shape({
-	name: yup.string().required(),
-	description: yup.string().required(),
+	name: yup.string().required('Введите название категории'),
+	description: yup.string().required('Введите описание категории'),
 });
 
 const CategoryAddContainer = ({ className }) => {
 	const { id: catId } = useParams();
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -36,16 +41,24 @@ const CategoryAddContainer = ({ className }) => {
 		resolver: yupResolver(addCarShema),
 	});
 
+	const formErrors = errors?.name?.message || errors?.description?.message;
+
+	useEffect(() => {
+		if (formErrors) {
+			dispatch(addMessage({ id: Date.now(), message: formErrors }));
+		}
+	}, [formErrors, dispatch]);
+
 	const onSubmit = ({ name, description, color }) => {
 		!catId
 			? request('/admin/category', 'POST', { name, description, color }).then(
 					({ error, category }) => {
 						if (error) {
-							console.log(error);
+							dispatch(addMessage({ id: Date.now(), message: error }));
 							return;
 						}
-						console.log(category);
 						reset();
+						navigate('/admin/categoryes');
 					},
 			  )
 			: request(`/admin/category/${catId}`, 'PATCH', {
@@ -54,10 +67,10 @@ const CategoryAddContainer = ({ className }) => {
 					color,
 			  }).then(({ error, category }) => {
 					if (error) {
-						console.log(error);
+						dispatch(addMessage({ id: Date.now(), message: error }));
 						return;
 					}
-					console.log(category);
+					navigate('/admin/categoryes');
 			  });
 	};
 

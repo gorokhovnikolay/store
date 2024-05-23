@@ -1,27 +1,39 @@
 import styled from 'styled-components';
+import { useAppDispatch } from '../../storeRtk/hooks';
+import { deleteMessage } from '../../storeRtk/slice/message-reducer';
 
-const TooltipContainer = ({ message, className }) => {
-	return message && <div className={className}>{message}</div>;
+const TooltipContainer = ({ messages, className }) => {
+	const dispatch = useAppDispatch();
+
+	return (
+		<div className={className}>
+			{messages?.map(({ id = '0', message }) => {
+				setTimeout(() => {
+					dispatch(deleteMessage(id));
+				}, [3000]);
+				return (
+					<div key={id} className="tool-tip">
+						{id}:{message}
+						<button onClick={() => dispatch(deleteMessage(id))}>x</button>
+					</div>
+				);
+			})}
+		</div>
+	);
 };
 
 export const Tooltip = styled(TooltipContainer)`
-	opacity: 0;
-	display: block;
+	display: flex;
 	position: fixed;
-	top: 50px;
-	right: 50px;
-	background: #ff0000c2;
-	min-width: 300px;
-	min-height: 50px;
-	padding: 10px;
-	animation: visible 3000ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
-
-	@-webkit-keyframes visible {
-		from {
-			opacity: 1;
-		}
-		to {
-			opacity: 0;
-		}
+	top: 10px;
+	right: 10px;
+	flex-direction: column;
+	& .tool-tip {
+		display: block;
+		background: #ff0000c2;
+		min-width: 300px;
+		min-height: 50px;
+		padding: 10px;
+		margin-bottom: 5px;
 	}
 `;

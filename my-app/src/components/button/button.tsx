@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface ButtonContainerProps{
 		[x: string]: any;
-		className: string;
+		className?: string;
 		children: React.ReactNode;
 }
 
@@ -21,7 +21,7 @@ export const Button = styled(ButtonContainer)`
 	justify-content: center;
 	font-size: 16px;
 	font-weight: 600;
-	background: ${({ background = '#62bceb' }) => background};
+	background: ${({ background = '#62bceb',disabled }) => disabled ? '#62bceb8a' : background };
 	color: ${({ color = 'white' }) => color};
 	border: 1px solid #62bceb;
 	padding: ${({ padding = '5px 15px' }) => padding};

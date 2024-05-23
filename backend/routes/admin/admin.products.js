@@ -15,8 +15,17 @@ const router = express.Router({ mergeParams: true });
 
 router.get("/", authenticated, hasRole([role.ADMIN]), async (req, res) => {
 	try {
-		const product = await getProduct();
-		res.send({ error: null, product: product.map(adminProductMap) });
+		const { products, lastPage, allCount } = await getProduct(
+			req.query.phrase,
+			req.query.page,
+			req.query.limit
+		);
+		res.send({
+			error: null,
+			product: products.map(adminProductMap),
+			lastPage,
+			allCount,
+		});
 	} catch (e) {
 		res.send({ error: e.message, category: null });
 	}

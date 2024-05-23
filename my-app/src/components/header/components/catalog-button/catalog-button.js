@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '../../../button/button';
 import { BurgerMenu } from '../../../../assets/svg/menu';
-import { useDispatch, useSelector } from 'react-redux';
 import { ModalCatalog } from '../../../modal-catalog/modal-catalog';
-import { modalContainerVisible } from '../../../../store/selectors';
 import { CloseIcon } from '../../../../assets/svg/close';
 import { CategoryList } from './components/category-list';
 import { useAppDispatch, useAppSelector } from '../../../../storeRtk/hooks.ts';

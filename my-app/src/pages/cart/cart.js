@@ -1,11 +1,13 @@
 import { Button } from '../../components/';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useAppDispatch } from '../../storeRtk/hooks.ts';
 import { asyncDeleteProduct, asyncArrangeOrder } from '../../storeRtk/slice/user.ts';
+import { useNavigate } from 'react-router-dom';
 
 const CartContainer = ({ className }) => {
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
 	const products = useSelector(({ user }) => user.cart);
@@ -15,7 +17,7 @@ const CartContainer = ({ className }) => {
 	};
 
 	const arrangeOrder = () => {
-		dispatch(asyncArrangeOrder(products));
+		dispatch(asyncArrangeOrder(products)).then(() => navigate('/successorder'));
 	};
 
 	const sum = useMemo(() => {

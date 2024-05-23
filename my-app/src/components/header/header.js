@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
 import { CatalogButton, HeaderButtons, Search } from './components';
 import { Link, useNavigate } from 'react-router-dom';
 import { request } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../storeRtk/hooks.ts';
 import { logOut } from '../../storeRtk/slice/user.ts';
+import { ExitIcon } from '../../assets/svg/exit.tsx';
 
 const HeaderContainer = ({ className }) => {
 	const dispatch = useAppDispatch();
@@ -26,7 +26,10 @@ const HeaderContainer = ({ className }) => {
 				</div>
 				<div>
 					{userName ? (
-						<div onClick={logOutClick}>{userName}</div>
+						<div className="log-out-link" onClick={logOutClick}>
+							{userName}
+							<ExitIcon color="black" />
+						</div>
 					) : (
 						<Link to="/login">Войти</Link>
 					)}
@@ -55,5 +58,10 @@ export const Header = styled(HeaderContainer)`
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 25px;
+	}
+	& .log-out-link {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
 	}
 `;

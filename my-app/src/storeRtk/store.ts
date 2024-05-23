@@ -3,6 +3,7 @@ import userReducer from './slice/user'
 import searchPhraseReducer from './slice/search-phrase'
 import modalReducer from './slice/modal'
 import modalCatalogReducer from './slice/modal-catalog'
+import messageReducer from './slice/message-reducer'
 
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
 		user: userReducer,
 		searchPhrase: searchPhraseReducer,
 		modal: modalReducer,
-		modalCatalog: modalCatalogReducer
+		modalCatalog: modalCatalogReducer,
+		errorMessage: messageReducer,
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({

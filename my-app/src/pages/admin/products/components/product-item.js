@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { request } from '../../../../utils';
 import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
 import { closeModal, visibleModal } from '../../../../storeRtk/slice/modal.ts';
+import { addMessage } from '../../../../storeRtk/slice/message-reducer.ts';
 
 const ProductItemContainer = ({
 	className,
@@ -22,7 +23,7 @@ const ProductItemContainer = ({
 					request(`/admin/product/${id}`, 'DELETE').then(
 						({ message, error }) => {
 							if (error) {
-								console.log(error);
+								dispatch(addMessage({ id: Date.now(), message: error }));
 								return;
 							}
 							setRefresh((prev) => !prev);

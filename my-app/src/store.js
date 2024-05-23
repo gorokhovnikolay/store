@@ -12,6 +12,7 @@ import {
 	Product,
 	Cart,
 	Successorder,
+	Personal,
 } from './pages';
 import {
 	CategoryAdd,
@@ -61,7 +62,7 @@ export const Store = () => {
 
 	const exitPage = (e) => {
 		if (e.pageY <= 2) {
-			console.log('Вы покидаете страницу');
+			// console.log('Вы покидаете страницу');
 		}
 	};
 
@@ -73,7 +74,7 @@ export const Store = () => {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/" element={<Main />} />
-					<Route path="/personal" element={<div>personal</div>} />
+					<Route path="/personal" element={<Personal />} />
 					<Route path="/category" element={<CategoryPage />} />
 					<Route path="/product/:productId" element={<Product />} />
 					<Route path="/category/:catId" element={<CategoryPage />} />

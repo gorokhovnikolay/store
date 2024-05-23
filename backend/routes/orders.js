@@ -8,8 +8,12 @@ const router = express.Router({ mergeParams: true });
 
 router.get("/", authenticated, hasRole([role.ADMIN]), async (req, res) => {
 	try {
-		const orders = await getOrders();
-		res.send({ error: null, orders: orders });
+		const { orders, lastPage } = await getOrders(
+			req.query.page,
+			req.query.limit
+		);
+
+		res.send({ error: null, orders: orders, lastPage });
 	} catch (e) {
 		res.send({ error: e.message, order: null });
 	}

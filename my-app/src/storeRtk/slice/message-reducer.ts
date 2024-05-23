@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface IErrorMessage {
-	id:string,
+	id:number,
 	message:string
 }
 
@@ -12,7 +12,10 @@ const errorMessageSlice = createSlice({
 	name: 'errorMessage',
 	initialState,
 	reducers: {
-		addMessage: (state,action)=>{
+		addMessage: (state,action:{
+			payload: {id:number,message:string};
+			type: string;
+		})=>{
 			return [...state,action.payload]
 		},
 		deleteMessage: (state,action)=>{

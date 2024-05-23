@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import AsyncSelect from 'react-select/async';
@@ -10,10 +11,10 @@ import { useAppDispatch } from '../../../storeRtk/hooks';
 import { addMessage } from '../../../storeRtk/slice/message-reducer';
 
 const addCarShema = yup.object().shape({
-	name: yup.string().required(),
-	image: yup.string().required(),
-	price: yup.number().required(),
-	description: yup.string(),
+	name: yup.string().required('Введите название товара'),
+	image: yup.string().required('Введите URL изображения товара'),
+	price: yup.number().required('Введите стоимость товара'),
+	description: yup.string().required('Введите описание товара'),
 });
 
 const CategoryAddContainer = ({ className }) => {
@@ -46,6 +47,18 @@ const CategoryAddContainer = ({ className }) => {
 		reset();
 	};
 
+	const formErrors =
+		errors?.name?.message ||
+		errors?.description?.message ||
+		errors?.image?.message ||
+		errors?.price?.message;
+
+	useEffect(() => {
+		if (formErrors) {
+			dispatch(addMessage({ id: Date.now(), message: formErrors }));
+		}
+	}, [formErrors, dispatch]);
+
 	const loadOptions = async (inputValue, callback) => {
 		request('/admin/category').then(({ category }) => {
 			const options = category.map((row) => ({
@@ -60,7 +73,7 @@ const CategoryAddContainer = ({ className }) => {
 		<div className={className}>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className="form-input">
-					<label htmlFor="name">Введите название категории:</label>
+					<label htmlFor="name">Введите название товара:</label>
 					<Input
 						placeholder="Введите название категории"
 						id="name"
@@ -69,7 +82,7 @@ const CategoryAddContainer = ({ className }) => {
 					/>
 				</div>
 				<div className="form-input">
-					<label htmlFor="price">Введите название категории:</label>
+					<label htmlFor="price">Введите стоимость товара:</label>
 					<Input
 						placeholder="Введите стоимость"
 						id="price"

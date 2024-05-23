@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import styled from 'styled-components';
 import { Button, Input } from '../../../components';
 import { request } from '../../../utils';
+import { useAppDispatch } from '../../../storeRtk/hooks';
+import { addMessage } from '../../../storeRtk/slice/message-reducer';
 
 const phoneRegExp =
 	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -24,8 +26,9 @@ const regShemaYup = yup.object().shape({
 
 const EditUserContainer = ({ className }) => {
 	const { id } = useParams();
-	const [isLoading, setIsLoading] = useState(false);
-	const [errorServer, setErrorServer] = useState('');
+
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 
 	const {
 		register,
@@ -35,10 +38,15 @@ const EditUserContainer = ({ className }) => {
 	} = useForm({
 		defaultValues: async () => {
 			const { user } = await request(`/admin/users/${id}`);
+			const roleLabel = user.role === '0' ? 'Админ' : 'Пользаватель';
 			return {
 				login: user.login,
 				email: user.email || '',
 				phone: user.phone || '',
+				role: { label: roleLabel, value: user.role } || {
+					label: 'Пользаватель',
+					value: '1',
+				},
 			};
 		},
 		resolver: yupResolver(regShemaYup),
@@ -55,18 +63,25 @@ const EditUserContainer = ({ className }) => {
 			role: formatRole(role),
 		}).then(({ error, user }) => {
 			if (error) {
-				setErrorServer(error);
+				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;
 			}
-			console.log(user);
+			navigate('/admin/users');
 		});
 	};
-	return isLoading ? (
-		<progress value={null} />
-	) : (
+
+	const formErrors =
+		errors?.login?.message || errors?.email?.message || errors?.phone?.message;
+
+	useEffect(() => {
+		if (formErrors) {
+			dispatch(addMessage({ id: Date.now(), message: formErrors }));
+		}
+	}, [formErrors, dispatch]);
+
+	return (
 		<div className={className}>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				{errorServer && <div>{errorServer}</div>}
 				<div className="login">
 					<Input
 						placeholder="Введите ваш логин"
@@ -98,12 +113,20 @@ const EditUserContainer = ({ className }) => {
 						render={({ field }) => (
 							<Select
 								{...field}
+								defaultOptions
+								classNamePrefix="react-custom"
 								cacheOptions
 								isMulti={false}
 								options={[
 									{ label: 'Админ', value: '0' },
 									{ label: 'Пользаватель', value: '1' },
 								]}
+								theme={(theme) => {
+									return {
+										...theme,
+										borderRadius: '25px',
+									};
+								}}
 							/>
 						)}
 					/>

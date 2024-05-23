@@ -1,16 +1,14 @@
 FROM node:18
 
-WORKDIR /src/usr/app
+WORKDIR /usr/src/app
 
 COPY . .
 
-WORKDIR /src/usr/app/my-app
-
+WORKDIR /usr/src/app/my-app
 RUN npm i
 RUN npm run build
 
-WORKDIR /src/usr/app/backend
-
+WORKDIR /usr/src/app/backend
 RUN npm i
 
 EXPOSE 3006

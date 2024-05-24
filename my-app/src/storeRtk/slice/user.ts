@@ -5,9 +5,11 @@ import {request} from '../../utils/request'
 
 export const asyncAddProductToCart = createAsyncThunk('user/asyncAddProductToCart', async (product) =>{
 	try {
-		const {cartProduct} = await request('/api/cart', 'PATCH', product)
+		const cartProduct = await request('/api/cart', 'PATCH', product)
+
 		return cartProduct
 	} catch (e) {
+
 		return e
 	}
 })
@@ -35,6 +37,7 @@ interface UserState {
 	login: null | string,
 	roleId: null | number,
 	cart: IProduct[],
+	error: string
 
 }
 
@@ -42,7 +45,8 @@ const initialState: UserState = {
 	id: null,
 	login: null,
 	roleId: null,
-	cart: []
+	cart: [],
+	error:''
 }
 
 export const userSlice = createSlice({
@@ -59,7 +63,14 @@ export const userSlice = createSlice({
 	extraReducers: (builder)=>{
 		builder
 		.addCase(asyncAddProductToCart.fulfilled,(state,action)=>{
-			return state = {...state, cart: action.payload}
+			if(action.payload.error){
+				return state = {...state, error: action.payload.error}
+			}
+			return state = {...state, cart: action.payload.cartProduct || state.cart}
+		})
+		.addCase(asyncAddProductToCart.rejected,(state,action)=>{
+			console.log(action)
+			return state = {...state, error: 'Ошибка'}
 		})
 		.addCase(asyncDeleteProduct.fulfilled,(state,action)=>{
 			return state = {...state, cart: action.payload}

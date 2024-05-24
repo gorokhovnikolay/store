@@ -5,12 +5,14 @@ import { request } from '../../utils';
 import { Button, ContainerBlock } from '../../components';
 import { useAppSelector, useAppDispatch } from '../../storeRtk/hooks.ts';
 import { asyncAddProductToCart } from '../../storeRtk/slice/user.ts';
+import { addMessage } from '../../storeRtk/slice/message-reducer.ts';
 
 const ProductContainer = ({ className }) => {
 	const { productId } = useParams();
 	const [product, setProduct] = useState({});
 	const [errorServer, setErrorServer] = useState();
 	const [isLoading, setIsLoading] = useState();
+	const [isDisabled, setIsDisabled] = useState(false);
 
 	const dispatch = useAppDispatch();
 	const roleId = useAppSelector(({ user }) => user.role);
@@ -31,7 +33,14 @@ const ProductContainer = ({ className }) => {
 	}, [productId]);
 
 	const addCart = () => {
-		dispatch(asyncAddProductToCart({ product }));
+		setIsDisabled(true);
+		dispatch(asyncAddProductToCart({ product }))
+			.then(({ payload }) => {
+				if (payload.error) {
+					dispatch(addMessage({ id: Date.now(), message: payload.error }));
+				}
+			})
+			.finally(() => setIsDisabled(false));
 	};
 
 	return (
@@ -48,7 +57,7 @@ const ProductContainer = ({ className }) => {
 						width="150px"
 						height="50px"
 						background="green"
-						disabled={!isNotGuest}
+						disabled={!isNotGuest || isDisabled}
 						onClick={addCart}
 						title={
 							isNotGuest

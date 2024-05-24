@@ -1,4 +1,5 @@
 docker build -t store .
+docker run -p 80:3006 -d store
 
 <!-- FRONTEND -->
 <!-- Списки: -->

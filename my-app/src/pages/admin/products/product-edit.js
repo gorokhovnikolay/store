@@ -28,7 +28,7 @@ const ProductEditContainer = ({ className }) => {
 		reset,
 	} = useForm({
 		defaultValues: async () => {
-			const { product } = await request(`/admin/product/${id}`);
+			const { product } = await request(`/api/admin/product/${id}`);
 			return {
 				name: product.name,
 				description: product.description,
@@ -59,19 +59,20 @@ const ProductEditContainer = ({ className }) => {
 				cat: data.category.map((category) => category.value),
 			};
 		};
-		request(`/admin/product/${id}`, 'PATCH', formatProduct(product)).then(
+		request(`/api/admin/product/${id}`, 'PATCH', formatProduct(product)).then(
 			({ error, product }) => {
 				if (error) {
 					dispatch(addMessage({ id: Date.now(), message: error }));
 					return;
 				}
+				navigate(-1);
 			},
 		);
-		navigate(-1);
+
 		reset();
 	};
 	const loadOptions = async (inputValue, callback) => {
-		request('/admin/category').then(({ category }) => {
+		request('/api/admin/category').then(({ category }) => {
 			const options = category.map((row) => ({
 				label: row.name,
 				value: row.id,

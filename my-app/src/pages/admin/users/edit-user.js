@@ -37,7 +37,7 @@ const EditUserContainer = ({ className }) => {
 		control,
 	} = useForm({
 		defaultValues: async () => {
-			const { user } = await request(`/admin/users/${id}`);
+			const { user } = await request(`/api/admin/users/${id}`);
 			const roleLabel = user.role === '0' ? 'Админ' : 'Пользаватель';
 			return {
 				login: user.login,
@@ -55,7 +55,7 @@ const EditUserContainer = ({ className }) => {
 		const formatRole = (data) => {
 			return data.value;
 		};
-		request(`/admin/users/${id}`, 'PATCH', {
+		request(`/api/admin/users/${id}`, 'PATCH', {
 			password,
 			email,
 			login,

@@ -15,3 +15,4 @@ export * from './orders.tsx';
 export * from './categories.tsx';
 export * from './shoes.tsx';
 export * from './exit.tsx';
+export * from './shoes-logo.tsx';

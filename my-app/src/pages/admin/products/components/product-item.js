@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Button } from '../../../../components';
 import { EditIcon, RemoveIcon } from '../../../../assets/svg';
-import { useDispatch } from 'react-redux';
 import { request } from '../../../../utils';
 import { useAppDispatch } from '../../../../storeRtk/hooks.ts';
 import { closeModal, visibleModal } from '../../../../storeRtk/slice/modal.ts';
@@ -20,7 +19,7 @@ const ProductItemContainer = ({
 				modal: true,
 				confirm: () => {
 					dispatch(closeModal());
-					request(`/admin/product/${id}`, 'DELETE').then(
+					request(`/api/admin/product/${id}`, 'DELETE').then(
 						({ message, error }) => {
 							if (error) {
 								dispatch(addMessage({ id: Date.now(), message: error }));

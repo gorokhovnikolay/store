@@ -21,7 +21,7 @@ const PersonalContainer:React.FC<PersonalProps>=({className})=>{
 	const [orders,setOrders] = useState([])
 
 	useEffect(()=>{
-		request('/user/orders').then(({error,orders})=>{
+		request('/api/user/orders').then(({error,orders})=>{
 			if(error){
 				dispatch(addMessage({id: Date.now(),message:error}))
 				return

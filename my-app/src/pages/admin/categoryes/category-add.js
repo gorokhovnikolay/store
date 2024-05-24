@@ -31,7 +31,7 @@ const CategoryAddContainer = ({ className }) => {
 					description: '',
 			  }
 			: async () => {
-					const { category } = await request(`/admin/category/${catId}`);
+					const { category } = await request(`/api/admin/category/${catId}`);
 					return {
 						name: category.name,
 						description: category.description,
@@ -51,7 +51,7 @@ const CategoryAddContainer = ({ className }) => {
 
 	const onSubmit = ({ name, description, color }) => {
 		!catId
-			? request('/admin/category', 'POST', { name, description, color }).then(
+			? request('/api/admin/category', 'POST', { name, description, color }).then(
 					({ error, category }) => {
 						if (error) {
 							dispatch(addMessage({ id: Date.now(), message: error }));
@@ -61,7 +61,7 @@ const CategoryAddContainer = ({ className }) => {
 						navigate('/admin/categoryes');
 					},
 			  )
-			: request(`/admin/category/${catId}`, 'PATCH', {
+			: request(`/api/admin/category/${catId}`, 'PATCH', {
 					name,
 					description,
 					color,

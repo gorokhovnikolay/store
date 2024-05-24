@@ -12,7 +12,7 @@ const CategoryListContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request('/category')
+		request('/api/category')
 			.then(({ error, categoryes }) => {
 				if (error) {
 					setIsLoading(false);

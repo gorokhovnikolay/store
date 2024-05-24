@@ -10,7 +10,7 @@ const MainContainer = ({ className }) => {
 	const [countUser, setCountUser] = useState();
 	const dispatch = useAppDispatch();
 	useEffect(() => {
-		request('/admin').then(({ countOrders, countProducts, countUser, error }) => {
+		request('/api/admin').then(({ countOrders, countProducts, countUser, error }) => {
 			if (error) {
 				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;

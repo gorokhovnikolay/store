@@ -24,7 +24,7 @@ const ProductsContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request(`/admin/product?phrase=${phrase}&page=${page}&limit=${limit}`)
+		request(`/api/admin/product?phrase=${phrase}&page=${page}&limit=${limit}`)
 			.then(({ error, product, lastPage, allCount }) => {
 				if (error) {
 					setIsLoading(false);

@@ -20,7 +20,7 @@ const CatalogButtonContainer = ({ className }) => {
 				</Button>
 			</div>
 			{isModalVisible && (
-				<ModalCatalog>
+				<ModalCatalog top="230px">
 					<CategoryList />
 				</ModalCatalog>
 			)}

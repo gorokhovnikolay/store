@@ -15,7 +15,7 @@ const CategoryItemContainer = ({ className, category, setRefresh }) => {
 				modal: true,
 				confirm: () => {
 					dispatch(closeModal());
-					request(`/admin/category/${category.id}`, 'DELETE').then(
+					request(`/api/admin/category/${category.id}`, 'DELETE').then(
 						({ category, error }) => {
 							if (error) {
 								dispatch(addMessage({ id: Date.now(), message: error }));

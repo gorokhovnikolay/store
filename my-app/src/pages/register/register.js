@@ -54,7 +54,7 @@ const RegisterContainer = ({ className }) => {
 
 	const onSubmit = ({ login, password, email, phone }) => {
 		setIsLoading(true);
-		request('/register', 'POST', { login, password, email, phone }).then(
+		request('/api/register', 'POST', { login, password, email, phone }).then(
 			({ error, user }) => {
 				if (error) {
 					setIsLoading(false);

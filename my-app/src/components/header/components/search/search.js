@@ -19,7 +19,7 @@ const SearchContainer = ({ className }) => {
 			setProducts([]);
 			return;
 		}
-		request(`/products?search=${phrase}`).then(({ error, products }) => {
+		request(`/api/products?search=${phrase}`).then(({ error, products }) => {
 			if (error) {
 				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;

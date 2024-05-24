@@ -14,7 +14,7 @@ const UsersContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request('/admin/users')
+		request('/api/admin/users')
 			.then(({ users, error }) => {
 				if (error) {
 					setIsLoading(false);

@@ -18,7 +18,7 @@ const CategoryPageContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request(`/product/category/${catId}?search=${phrases}`)
+		request(`/api/product/category/${catId}?search=${phrases}`)
 			.then(({ products, error }) => {
 				if (error) {
 					setIsLoading(false);

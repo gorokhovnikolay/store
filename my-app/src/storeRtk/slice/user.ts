@@ -5,7 +5,7 @@ import {request} from '../../utils/request'
 
 export const asyncAddProductToCart = createAsyncThunk('user/asyncAddProductToCart', async (product) =>{
 	try {
-		const {cartProduct} = await request('/cart', 'PATCH', product)
+		const {cartProduct} = await request('/api/cart', 'PATCH', product)
 		return cartProduct
 	} catch (e) {
 		return e
@@ -13,7 +13,7 @@ export const asyncAddProductToCart = createAsyncThunk('user/asyncAddProductToCar
 })
 export const asyncDeleteProduct = createAsyncThunk('user/asyncDeleteProduct', async (id) =>{
 	try {
-		const {cartProducts} = await request(`/cart/delete/${id}`, 'PATCH', { id })
+		const {cartProducts} = await request(`/api/cart/delete/${id}`, 'PATCH', { id })
 
 		return cartProducts
 	} catch (e) {
@@ -22,7 +22,7 @@ export const asyncDeleteProduct = createAsyncThunk('user/asyncDeleteProduct', as
 })
 export const asyncArrangeOrder = createAsyncThunk('user/asyncArrangeOrder', async (products) =>{
 	try {
-		const {order} = await request(`/order`, 'POST', {products})
+		const {order} = await request(`/api/order`, 'POST', {products})
 		return order
 	} catch (e) {
 		return e

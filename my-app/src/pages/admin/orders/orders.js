@@ -15,7 +15,7 @@ const OrdersContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request(`/order?page=${page}&limit=${limit}`)
+		request(`/api/order?page=${page}&limit=${limit}`)
 			.then(({ error, orders, lastPage }) => {
 				if (error) {
 					setServerError(error);

@@ -25,14 +25,16 @@ const UserItemContainer = ({
 				modal: true,
 				confirm: () => {
 					dispatch(closeModal());
-					request(`/admin/users/${id}`, 'DELETE').then(({ message, error }) => {
-						if (error) {
-							setMessage(error);
-							return;
-						}
-						setRefresh((prev) => !prev);
-						setMessage(message);
-					});
+					request(`/api/admin/users/${id}`, 'DELETE').then(
+						({ message, error }) => {
+							if (error) {
+								setMessage(error);
+								return;
+							}
+							setRefresh((prev) => !prev);
+							setMessage(message);
+						},
+					);
 				},
 				cancel: () => dispatch(closeModal()),
 			}),

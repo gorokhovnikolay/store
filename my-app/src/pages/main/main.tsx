@@ -26,7 +26,7 @@ export const MainContainer:React.FC<{className:string}> = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request(`/products?search=${phrases}&limit=${limit}&page=${page}`)
+		request(`/api/products?search=${phrases}&limit=${limit}&page=${page}`)
 			.then(({ error, products, lastPage }:{error:string,products:IProduct[],lastPage:number}) => {
 
 				if (error) {

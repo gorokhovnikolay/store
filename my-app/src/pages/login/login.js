@@ -47,7 +47,7 @@ const LoginContainer = ({ className }) => {
 
 	const onSubmit = ({ login, password }) => {
 		reset();
-		request('/login', 'POST', { login, password }).then(({ error, user }) => {
+		request('/api/login', 'POST', { login, password }).then(({ error, user }) => {
 			if (error) {
 				setServerError(error);
 				setIsLoading(false);

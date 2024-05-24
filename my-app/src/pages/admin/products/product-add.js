@@ -36,7 +36,7 @@ const CategoryAddContainer = ({ className }) => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const onSubmit = (product) => {
-		request('/admin/product', 'POST', product).then(({ error, product }) => {
+		request('/api/admin/product', 'POST', product).then(({ error, product }) => {
 			if (error) {
 				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;
@@ -60,7 +60,7 @@ const CategoryAddContainer = ({ className }) => {
 	}, [formErrors, dispatch]);
 
 	const loadOptions = async (inputValue, callback) => {
-		request('/admin/category').then(({ category }) => {
+		request('/api/admin/category').then(({ category }) => {
 			const options = category.map((row) => ({
 				label: row.name,
 				value: row.id,

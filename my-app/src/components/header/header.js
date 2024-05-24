@@ -5,13 +5,14 @@ import { request } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../storeRtk/hooks.ts';
 import { logOut } from '../../storeRtk/slice/user.ts';
 import { ExitIcon } from '../../assets/svg/exit.tsx';
+import { ShoesLogoIcon } from '../../assets/svg/shoes-logo.tsx';
 
 const HeaderContainer = ({ className }) => {
 	const dispatch = useAppDispatch();
 	const userName = useAppSelector((state) => state.user.login);
 	const navigate = useNavigate();
 	const logOutClick = () => {
-		request('/logout', 'POST').then(({ error, user }) => {
+		request('/api/logout', 'POST').then(({ error, user }) => {
 			localStorage.removeItem('user');
 			dispatch(logOut());
 			navigate('/');
@@ -22,7 +23,9 @@ const HeaderContainer = ({ className }) => {
 		<div className={className}>
 			<div className="header-top-bar">
 				<div>
-					<Link to="/">Logo</Link>
+					<Link to="/">
+						<ShoesLogoIcon size="144px" />
+					</Link>
 				</div>
 				<div>
 					{userName ? (

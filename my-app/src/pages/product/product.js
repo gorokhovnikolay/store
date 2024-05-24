@@ -18,7 +18,7 @@ const ProductContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request(`/product/${productId}`)
+		request(`/api/product/${productId}`)
 			.then(({ error, product }) => {
 				if (error) {
 					setIsLoading(false);

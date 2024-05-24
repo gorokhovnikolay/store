@@ -50,7 +50,7 @@ export const Store = () => {
 	const message = useAppSelector((state) => state.errorMessage);
 
 	useEffect(() => {
-		request('/user').then(({ error, user }) => {
+		request('/api/user').then(({ error, user }) => {
 			if (error) {
 				dispatch(addMessage({ id: Date.now(), message: error }));
 				return;

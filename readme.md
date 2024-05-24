@@ -1,3 +1,5 @@
+docker build -t store .
+
 <!-- FRONTEND -->
 <!-- Списки: -->
 

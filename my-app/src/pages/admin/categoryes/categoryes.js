@@ -15,7 +15,7 @@ const CategoryesContainer = ({ className }) => {
 
 	useEffect(() => {
 		setIsLoading(true);
-		request('/admin/category')
+		request('/api/admin/category')
 			.then(({ error, category }) => {
 				setIsLoading(false);
 				if (error) {
